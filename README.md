@@ -3,11 +3,11 @@
 [Map Adventure Game] ###UPDATE NAME###
 Created by CS2520-01 Team Python
 Members:
-Evelyn Vu
-Isabel Ganda
-Joy Sun
-Zi Guo
-Tu Nguyen
+* Evelyn Vu
+' Isabel Ganda
+* Joy Sun
+* Zi Guo
+* Tu Nguyen
 
 
 ----DESCRIPTION OF PROJECT---- 
