@@ -4,7 +4,7 @@
 Created by CS2520-01 Team Python
 Members:
 * Evelyn Vu
-' Isabel Ganda
+* Isabel Ganda
 * Joy Sun
 * Zi Guo
 * Tu Nguyen
