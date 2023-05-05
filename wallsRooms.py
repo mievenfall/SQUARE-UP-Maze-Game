@@ -3,8 +3,6 @@ This files deals with the layout of the maze, along with creating each individua
 
 """
 
-
-
 import pygame
 from colors import *
  
@@ -40,27 +38,25 @@ class Room(object):
         self.wallsList = pygame.sprite.Group()
         self.enemy_sprites = pygame.sprite.Group()
  
-# I made different classes for different room to identify which room the user is in,
-# Add more details to identify rooms if you want.
 
 # 4 WALLS ROOM
-class Room1(Room):
-    """This creates all the walls in room 1"""
+class RoomFull(Room):
+    """This creates all the walls in room"""  
     def __init__(self):
         super().__init__()
         # Make the walls. (x-axis, y-axis, width, height)
  
         # This is a list of walls. Each is in the form [x, y, width, height]
-        walls = [[0, 0, 20, 250, WHITE], 
-                 [20, 0, 320, 20, WHITE],
-
-                 [0, 350, 20, 250, WHITE], 
-                 [20, 580, 320, 20, WHITE], 
-
-                 [780, 0, 20, 250, WHITE], 
+        walls = [[20, 0, 320, 20, WHITE], #top
                  [450, 0, 330, 20, WHITE],
-                 
-                 [780, 350, 20, 250, WHITE], 
+
+                 [0, 0, 20, 250, WHITE], #left
+                 [0, 350, 20, 250, WHITE],
+
+                 [780, 0, 20, 250, WHITE], #right
+                 [780, 350, 20, 250, WHITE],
+
+                 [20, 580, 320, 20, WHITE], #bottom
                  [450, 580, 330, 20, WHITE], 
                 
                  [190, 50, 20, 500, BLUE]
@@ -71,53 +67,26 @@ class Room1(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
  
-# 4 WALLS ROOM
-class Room2(Room):
-    """This creates all the walls in room 2"""
-    def __init__(self):
-        super().__init__()
-
-        #[x, y, width, height, color]
-        walls = [[0, 0, 20, 250, WHITE], 
-                 [20, 0, 320, 20, WHITE],
-
-                 [0, 350, 20, 250, WHITE], 
-                 [20, 580, 320, 20, WHITE], 
-
-                 [780, 0, 20, 250, WHITE], 
-                 [450, 0, 330, 20, WHITE],
-                 
-                 [780, 350, 20, 250, WHITE], 
-                 [450, 580, 330, 20, WHITE], 
-                
-                 [190, 50, 20, 500, GREEN],
-                 [290, 50, 20, 500, GREEN]
-                ]
- 
-        for item in walls:
-            wall = Wall(item[0], item[1], item[2], item[3], item[4])
-            self.wallsList.add(wall)
- 
 # FULL TOP ROOM
-class Room3(Room):
+class RoomFullTop(Room):
     """This creates all the walls in room 3"""
     def __init__(self):
         super().__init__()
          
          #[x, y, width, height, color]
-        walls = [[0, 0, 20, 250, WHITE], 
+        walls = [[20, 0, 600, 20, WHITE], #top
 
-                 [0, 350, 20, 250, WHITE], 
-                 [20, 580, 320, 20, WHITE], 
+                 [0, 0, 20, 250, WHITE], #left
+                 [0, 350, 20, 250, WHITE],
 
-                 [780, 0, 20, 250, WHITE], 
-                 
-                 [780, 350, 20, 250, WHITE], 
+                 [780, 0, 20, 250, WHITE], #right
+                 [780, 350, 20, 250, WHITE],
+
+                 [20, 580, 320, 20, WHITE], #bottom
                  [450, 580, 330, 20, WHITE], 
-                
+
                  [190, 50, 20, 500, BLUE],
                  [290, 50, 20, 500, PURPLE],
-                 [390, 50, 20, 500, GREEN],
 
                  [20, 0, 760, 20, WHITE], #Any walls underneath the white walls are extras
                 ]
@@ -126,59 +95,25 @@ class Room3(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
 
-# 4 WALLS ROOM
-class Room4(Room):
-    """This creates all the walls in room 4"""
-    def __init__(self):
-        super().__init__()
-        # Make the walls. (x-axis, y-axis, width, height)
- 
-        # This is a list of walls. Each is in the form [x, y, width, height]
-        walls = [[0, 0, 20, 250, WHITE], 
-                 [20, 0, 320, 20, WHITE],
-
-                 [0, 350, 20, 250, WHITE], 
-                 [20, 580, 320, 20, WHITE], 
-
-                 [780, 0, 20, 250, WHITE], 
-                 [450, 0, 330, 20, WHITE],
-                 
-                 [780, 350, 20, 250, WHITE], 
-                 [450, 580, 330, 20, WHITE], 
-                
-                 [190, 50, 20, 500, BLUE],
-                 [290, 50, 20, 500, BLUE],
-                 [390, 50, 20, 500, BLUE],
-                 [490, 50, 20, 500, BLUE]
-                ]
- 
-        # Loop through the list. Create the wall, add it to the list
-        for item in walls: #[x, y, width, height]
-            wall = Wall(item[0], item[1], item[2], item[3], item[4])
-            self.wallsList.add(wall)
- 
- # FULL LEFT ROOM
-
 # FULL LEFT ROOM
-class Room5(Room):
+class RoomFullLeft(Room): 
     """This creates all the walls in room 4"""
     def __init__(self):
         super().__init__()
         # Make the walls. (x-axis, y-axis, width, height)
  
         # This is a list of walls. Each is in the form [x, y, width, height]
-        walls = [[0, 0, 20, 500, WHITE], 
-                 
-                 [20, 0, 320, 20, WHITE],
-
-                 [20, 580, 320, 20, WHITE], 
-
-                 [780, 0, 20, 250, WHITE], 
+        walls = [[20, 0, 320, 20, WHITE], #top
                  [450, 0, 330, 20, WHITE],
-                 
-                 [780, 350, 20, 250, WHITE], 
+
+                 [0, 0, 20, 600, WHITE], #left
+
+                 [780, 0, 20, 250, WHITE], #right
+                 [780, 350, 20, 250, WHITE],
+
+                 [20, 580, 320, 20, WHITE], #bottom
                  [450, 580, 330, 20, WHITE], 
-                
+
                  [190, 50, 20, 500, BLUE],
                  [290, 50, 20, 500, BLUE],
                  [390, 50, 20, 500, BLUE],
@@ -191,6 +126,62 @@ class Room5(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
  
+# FULL RIGHT ROOM
+class RoomFullRight(Room):
+    """This creates all the walls in room"""  
+    def __init__(self):
+        super().__init__()
+        # Make the walls. (x-axis, y-axis, width, height)
+ 
+        # This is a list of walls. Each is in the form [x, y, width, height]
+        walls = [[20, 0, 320, 20, WHITE], #top
+                 [450, 0, 330, 20, WHITE],
 
-#Copy-paste more rooms when necessary
-#Do not forget to update main.py whenever adding new rooms (starting line 83)
+                 [0, 0, 20, 250, WHITE], #left
+                 [0, 350, 20, 250, WHITE],
+
+                 [780, 0, 20, 600, WHITE], #right
+
+                 [20, 580, 320, 20, WHITE], #bottom
+                 [450, 580, 330, 20, WHITE], 
+                
+                 [190, 50, 20, 500, BLUE]
+                ]
+ 
+        # Loop through the list. Create the wall, add it to the list
+        for item in walls: #[x, y, width, height]
+            wall = Wall(item[0], item[1], item[2], item[3], item[4])
+            self.wallsList.add(wall)
+ 
+# FULL BOTTOM ROOM
+class RoomFullBottom(Room):
+    """This creates all the walls in room"""  
+    def __init__(self):
+        super().__init__()
+        # Make the walls. (x-axis, y-axis, width, height)
+ 
+        # This is a list of walls. Each is in the form [x, y, width, height]
+        walls = [[20, 0, 320, 20, WHITE], #top
+                 [450, 0, 330, 20, WHITE],
+
+                 [0, 0, 20, 250, WHITE], #left
+                 [0, 350, 20, 250, WHITE],
+
+                 [780, 0, 20, 250, WHITE], #right
+                 [780, 350, 20, 250, WHITE],
+
+                 [20, 580, 600, 20, WHITE], #bottom
+                
+                 [190, 50, 20, 500, BLUE]
+                ]
+ 
+        # Loop through the list. Create the wall, add it to the list
+        for item in walls: #[x, y, width, height]
+            wall = Wall(item[0], item[1], item[2], item[3], item[4])
+            self.wallsList.add(wall)
+ 
+ 
+
+# WE CAN CREATE A DIFFERENT DECORATION CLASS / METHOD HERE AND ADD TO THE ROOM
+# DONT NEED TO BE TOO FANCY
+# ROOMS CAN HAVE THE SAME DECORATION

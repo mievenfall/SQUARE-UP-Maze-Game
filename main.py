@@ -12,6 +12,21 @@ from colors import *
 from wallsRooms import *
 from player import *
 
+def createRoomList():
+    roomsList = [RoomFull(),
+                 RoomFull(),
+                 RoomFullTop(),
+                 RoomFull(),
+                 RoomFullLeft(),
+                 RoomFullTop(),
+                 RoomFullBottom(),
+                 RoomFullTop(),
+                 RoomFull(),
+                 RoomFull(),
+                 RoomFullBottom()]
+    return roomsList
+
+
 def main():
     """Uses the functions, classes, and other methods to setup and create the game"""
     # Initialize pygame
@@ -28,23 +43,8 @@ def main():
     movingsprites = pygame.sprite.Group()
     movingsprites.add(player)
  
-    #This list is used for toggling between rooms if the user goes through the doors
-    roomsList = []
- 
-    room = Room1()
-    roomsList.append(room)
- 
-    room = Room2()
-    roomsList.append(room)
- 
-    room = Room3()
-    roomsList.append(room)
-
-    room = Room4()
-    roomsList.append(room)
-
-    room = Room5()
-    roomsList.append(room)
+    #This list i(s used for toggling between rooms if the user goes through the doors
+    roomsList = createRoomList()
  
     current_room_no = 1
     current_room = roomsList[current_room_no-1]
