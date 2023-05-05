@@ -39,9 +39,15 @@ def main():
  
     room = Room3()
     roomsList.append(room)
+
+    room = Room4()
+    roomsList.append(room)
+
+    room = Room5()
+    roomsList.append(room)
  
-    current_room_no = 0
-    current_room = roomsList[current_room_no]
+    current_room_no = 1
+    current_room = roomsList[current_room_no-1]
  
     clock = pygame.time.Clock()
  
@@ -84,33 +90,67 @@ def main():
         player.move(current_room.wallsList)
  
         #If the player touches the end of either side of the screen, move them into the next/previous room
+
+        #GO TO THE LEFT
         if player.rect.x < -15:
-            if current_room_no == 0:
+            # ROOM 1 -> ROOM 2
+            if current_room_no == 1:
                 current_room_no = 2
-                current_room = roomsList[current_room_no]
-                player.rect.x = 790
+                current_room = roomsList[current_room_no-1]
+                player.rect.x = 400
+                player.rect.y = 0
+
+            # ROOM 2 -> ROOM 2
             elif current_room_no == 2:
-                current_room_no = 1
-                current_room = roomsList[current_room_no]
-                player.rect.x = 790
-            else:
-                current_room_no = 0
-                current_room = roomsList[current_room_no]
-                player.rect.x = 790
- 
-        if player.rect.x > 801:
-            if current_room_no == 0:
-                current_room_no = 1
-                current_room = roomsList[current_room_no]
-                player.rect.x = 0
-            elif current_room_no == 1:
                 current_room_no = 2
-                current_room = roomsList[current_room_no]
+                current_room = roomsList[current_room_no-1]
                 player.rect.x = 0
+                player.rect.y = 300
+            
+            # ROOM 3 -> ROOM 3
+            elif current_room_no == 3:
+                current_room_no = 1
+                current_room = roomsList[current_room_no-1]
+                player.rect.x = 790
+
+            # ROOM 4 -> ROOM 1
+            elif current_room_no == 4:
+                current_room_no = 1   
+                current_room = roomsList[current_room_no-1]
+                player.rect.x = 400
+                player.rect.y = 600
+
+            # ROOM 5 xx
             else:
-                current_room_no = 0
-                current_room = roomsList[current_room_no]
+                current_room_no = 3   
+                current_room = roomsList[current_room_no-1]
+ 
+
+        #GO TO THE RIGHT
+        if player.rect.x > 801:
+            # ROOM 1 -> ROOM 3
+            if current_room_no == 1:
+                current_room_no = 3
+                current_room = roomsList[current_room_no-1]
                 player.rect.x = 0
+
+            # ROOM 2 -> DEAD END
+
+            # ROOM 3 -> ROOM 4
+            elif current_room_no == 3:
+                current_room_no = 4
+                current_room = roomsList[current_room_no-1]
+                player.rect.x = 400
+                player.rect.y = 0
+            
+            # ROOM 4 -> DEAD END
+
+            # ROOM 5 -> ROOM 3
+            else:
+                current_room_no = 3
+                current_room = roomsList[current_room_no-1]
+                player.rect.x = 400
+                player.rect.y = 600
  
         # --- Drawing ---
 
