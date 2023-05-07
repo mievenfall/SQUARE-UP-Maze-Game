@@ -13,7 +13,7 @@ from wallsRooms import *
 from player import *
 
 def createRoomsList():
-    roomsList = [RoomStart(0),
+    roomsList = [RoomEmptyBottom(0),
                  RoomFull(1),
                  RoomFull(2),
                  RoomFullTop(3),
@@ -24,8 +24,14 @@ def createRoomsList():
                  RoomFullTop(8),
                  RoomFullLeftRight(9),
                  RoomFull(10),
-                 RoomFullBottom(11)]
-    return roomsList
+                 RoomFullBottom(11),
+                 RoomEmptyTop(12),
+                 RoomEmptyLeft(13),
+                 RoomEmptyLeft(14),
+                 RoomEmptyRight(15),
+                 RoomEmptyBottom(16),
+                 RoomEmptyLeft(17)]
+    return roomsList    
 
 def topPos(player):
     return 390, 50
@@ -105,7 +111,8 @@ def goRight(num, roomsList, player):
 
     # ROOM 2 -> DEADEND
     elif num == 2:
-        pass
+        num == 12
+        player.rect.x, player.rect.y = topPos(player)
 
     # ROOM 3 -> ROOM 4
     elif num == 3:
@@ -114,7 +121,8 @@ def goRight(num, roomsList, player):
 
     # ROOM 4 -> DEAD END
     elif num == 4:
-        pass
+        num == 13
+        player.rect.x, player.rect.y = leftPos(player)
 
     # ROOM 5 -> ROOM 3
     elif num == 5:
@@ -145,7 +153,9 @@ def goRight(num, roomsList, player):
 
     # ROOM 11 -> GOAL
     else:
-        pass
+        num == 17
+        player.rect.x, player.rect.y = leftPos(player)
+
 
     current_room = roomsList[num]
 
@@ -174,7 +184,9 @@ def goDown(num, roomsList, player):
 
     # ROOM 4 -> DEAD END
     elif num == 4:
-        pass
+        num == 14
+        player.rect.x, player.rect.y = leftPos(player)
+
 
     # ROOM 5 -> ROOM 6
     elif num == 5:
@@ -195,7 +207,9 @@ def goDown(num, roomsList, player):
 
     # ROOM 9 -> DEAD END
     elif num == 9:
-        pass
+        num == 16
+        player.rect.x, player.rect.y = botPos(player)
+
 
     # ROOM 10 -> ROOM 10
     elif num == 10:
@@ -232,7 +246,9 @@ def goUp(num, roomsList, player):
 
     # ROOM 5 -> DEAD END
     elif num == 5:
-        pass
+        num == 15
+        player.rect.x, player.rect.y = rightPos(player)
+
 
     # ROOM 6 xxx
 
@@ -330,19 +346,19 @@ def main():
         #GO TO THE LEFT
         if player.rect.x < -15:
             current_room, player.rect.x, player.rect.y, current_room_no = goLeft(current_room_no, roomsList, player)
-            print(current_room.num)
+            print(current_room.num, current_room_no)
         #GO TO THE RIGHT
         if player.rect.x > 801:
             current_room, player.rect.x, player.rect.y, current_room_no = goRight(current_room_no, roomsList, player)
-            print(current_room.num)
+            print(current_room.num, current_room_no)
         #GO DOWN
         if player.rect.y > 600:
             current_room, player.rect.x, player.rect.y, current_room_no = goDown(current_room_no, roomsList, player)
-            print(current_room.num)
+            print(current_room.num, current_room_no)
         #GO UP
         if player.rect.y < 15:
             current_room, player.rect.x, player.rect.y, current_room_no = goUp(current_room_no, roomsList, player)
-            print(current_room.num)
+            print(current_room.num, current_room_no)
         
         # --- Drawing ---
 
