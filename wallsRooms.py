@@ -200,7 +200,7 @@ class RoomFullBottom(Room):
                  [780, 0, 20, 250, WHITE], #right
                  [780, 350, 20, 250, WHITE],
 
-                 [20, 580, 600, 20, WHITE], #bottom
+                 [20, 580, 800, 20, WHITE], #bottom
                 
                  [190, 50, 20, 500, BLUE]
                 ]

@@ -28,16 +28,16 @@ def createRoomsList():
     return roomsList
 
 def topPos(player):
-    return 300, 0
+    return 390, 50
 
 def botPos(player):
-    return 320, 580
+    return 390, 550
 
 def leftPos(player):
-    return 0, 300
+    return 50, 295
 
 def rightPos(player):
-    return  790, 300
+    return  740, 295
 
 def goLeft(num, roomsList, player):
     # ROOM 1 -> ROOM 2
@@ -46,48 +46,51 @@ def goLeft(num, roomsList, player):
         player.rect.x, player.rect.y = topPos(player)
 
     # ROOM 2 -> ROOM 2
-    if num == 2:
+    elif num == 2:
         num = 2
         player.rect.x, player.rect.y = leftPos(player)
 
     # ROOM 3 -> ROOM 1
-    if num == 3:
+    elif num == 3:
         num = 1
         player.rect.x, player.rect.y = rightPos(player)
 
     # ROOM 4 -> ROOM 1
-    if num == 4:
+    elif num == 4:
         num = 1   
         player.rect.x, player.rect.y = botPos(player)
 
     # ROOM 5 XX
 
     # ROOM 6 -> ROOM 7
-    if num == 6:
+    elif num == 6:
         num = 7   
         player.rect.x, player.rect.y = rightPos(player)
 
     # ROOM 7 -> ROOM 8
-    if num == 7:
+    elif num == 7:
         num = 8   
         player.rect.x, player.rect.y = leftPos(player)
 
     # ROOM 8 -> ROOM 7
-    if num == 8:
+    elif num == 8:
         num = 7   
         player.rect.x, player.rect.y = leftPos(player)
 
     # ROOM 9 xxx
 
     # ROOM 10 -> ROOM 6
-    if num == 10:
+    elif num == 10:
         num = 6
         player.rect.x, player.rect.y = botPos(player)
 
     # ROOM 11 -> ROOM 10
-    if num == 11:
+    elif num == 11:
         num = 10
         player.rect.x, player.rect.y = topPos(player)
+
+    else:
+        pass
 
 
     current_room = roomsList[num]
@@ -155,51 +158,53 @@ def goDown(num, roomsList, player):
         player.rect.x, player.rect.y = topPos(player)
 
     # ROOM 1 -> ROOM 4
-    if num == 1: 
+    elif num == 1: 
         num = 4
         player.rect.x, player.rect.y = leftPos(player)
 
     # ROOM 2 -> ROOM 2
-    if num == 2:
+    elif num == 2:
         num = 2
         player.rect.x, player.rect.y = botPos(player)
 
     # ROOM 3 -> ROOM 5
-    if num == 3:
+    elif num == 3:
         num = 5
         player.rect.x, player.rect.y = rightPos(player)
 
     # ROOM 4 -> DEAD END
-    if num == 4:
+    elif num == 4:
         pass
 
     # ROOM 5 -> ROOM 6
-    if num == 5:
+    elif num == 5:
         num = 6
         player.rect.x, player.rect.y = rightPos(player)
 
     # ROOM 6 -> ROOM 10
-    if num == 6:
+    elif num == 6:
         num = 10   
         player.rect.x, player.rect.y = leftPos(player)
 
     # ROOM 7 xxx
 
     # ROOM 8 -> ROOM 9
-    if num == 8:
+    elif num == 8:
         num = 9
         player.rect.x, player.rect.y = topPos(player)
 
     # ROOM 9 -> DEAD END
-    if num == 9:
+    elif num == 9:
         pass
 
     # ROOM 10 -> ROOM 10
-    if num == 10:
+    elif num == 10:
         num = 10
         player.rect.x, player.rect.y = botPos(player)
 
     # ROOM 11 xxx
+    else:
+        pass
 
 
     current_room = roomsList[num]
@@ -214,19 +219,19 @@ def goUp(num, roomsList, player):
         player.rect.x, player.rect.y = botPos(player)
 
     # ROOM 2 -> ROOM 1
-    if num == 2:
+    elif num == 2:
         num = 1
         player.rect.x, player.rect.y = leftPos(player)
 
     # ROOM 3 xxx
 
     # ROOM 4 -> ROOM 3
-    if num == 4:
+    elif num == 4:
         num = 3
         player.rect.x, player.rect.y = rightPos(player)
 
     # ROOM 5 -> DEAD END
-    if num == 5:
+    elif num == 5:
         pass
 
     # ROOM 6 xxx
@@ -236,19 +241,22 @@ def goUp(num, roomsList, player):
     # ROOM 8 xxx
 
     # ROOM 9 -> ROOM 8
-    if num == 9:
+    elif num == 9:
         num = 8
         player.rect.x, player.rect.y = botPos(player)
 
     # ROOM 10 -> ROOM 11
-    if num == 10:
+    elif num == 10:
         num = 11
         player.rect.x, player.rect.y = leftPos(player)
 
     # ROOM 11 -> ROOM 11
-    if num == 11:
+    elif num == 11:
         num = 11
         player.rect.x, player.rect.y = topPos(player)
+
+    else:
+        pass
 
     current_room = roomsList[num]
 
@@ -323,7 +331,6 @@ def main():
         if player.rect.x < -15:
             current_room, player.rect.x, player.rect.y, current_room_no = goLeft(current_room_no, roomsList, player)
             print(current_room.num)
-
         #GO TO THE RIGHT
         if player.rect.x > 801:
             current_room, player.rect.x, player.rect.y, current_room_no = goRight(current_room_no, roomsList, player)
@@ -336,6 +343,7 @@ def main():
         if player.rect.y < 15:
             current_room, player.rect.x, player.rect.y, current_room_no = goUp(current_room_no, roomsList, player)
             print(current_room.num)
+        
         # --- Drawing ---
 
         #Black background color
