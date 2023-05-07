@@ -26,14 +26,24 @@ def createRoomList():
                  RoomFullBottom()]
     return roomsList
 
+#Display text on screen
+#First arg is the text, second arg is the color, third arg is the screen, fourth/fifth arg is the x/y coord respectively
+def showText(text, color, screen, x, y):
+    #Font Arial of size 30
+    font = pygame.font.SysFont("Arial", 30)
+
+    #Renders the text
+    #Boolean represents antialias
+    text = font.render(text, True, color)
+    screen.blit(text, (x, y))
 
 def main():
     """Uses the functions, classes, and other methods to setup and create the game"""
     # Initialize pygame
     pygame.init()
  
-    # Create an 800x600 sized screen
-    screen = pygame.display.set_mode([800, 600])
+    # Create an 800x750 sized screen
+    screen = pygame.display.set_mode([800, 750])
  
     # Set the title of the window
     pygame.display.set_caption('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
@@ -160,7 +170,12 @@ def main():
         #Draw sprites onto the screen
         movingsprites.draw(screen)
         current_room.wallsList.draw(screen)
- 
+        
+        #Display text onto the screen at (100, 500) using the showText function
+        #This would primarily be used to label each room to avoid confusion for the user
+        #And could let the user know they unlocked something after completing a puzzle if it were implemented
+        showText("Testing", WHITE, screen, 100, 500)
+        
         #Update the display onto the screen
         pygame.display.flip()
  
