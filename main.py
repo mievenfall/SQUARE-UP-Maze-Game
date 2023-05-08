@@ -13,7 +13,7 @@ from wallsRooms import *
 from player import *
 
 def createRoomsList():
-    roomsList = [RoomEmptyBottom(0),
+    roomsList = [RoomStart(0),
                  RoomFull(1),
                  RoomFull(2),
                  RoomFullTop(3),
@@ -339,7 +339,7 @@ def main():
     #This list i(s used for toggling between rooms if the user goes through the doors
     roomsList = createRoomsList()
  
-    current_room_no = 0
+    current_room_no = 12
     current_room = roomsList[current_room_no]
  
     clock = pygame.time.Clock()

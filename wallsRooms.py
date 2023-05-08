@@ -66,7 +66,29 @@ class RoomFull(Room):
         for item in walls: #[x, y, width, height]
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
+
+# START ROOM
+class RoomStart(Room):
+    """This creates all the walls in room 3"""
+    def __init__(self, num):
+        super().__init__()
+        self.num = num
+         #[x, y, width, height, color]
+        walls = [[20, 0, 800, 20, WHITE], #top
+
+                 [0, 0, 20, 600, WHITE], #left
+
+                 [780, 0, 20, 600, WHITE], #right
+
+                 [20, 580, 320, 20, WHITE], #bottom
+                 [450, 580, 330, 20, WHITE]
+                ]
  
+        for item in walls:
+            wall = Wall(item[0], item[1], item[2], item[3], item[4])
+            self.wallsList.add(wall)
+
+
 # FULL TOP ROOM
 class RoomFullTop(Room):
     """This creates all the walls in room 3"""
@@ -231,7 +253,7 @@ class RoomEmptyTop(Room):
 
                  [780, 0, 20, 600, WHITE], #right
 
-                 [20, 580, 800, 20, WHITE] #bottom
+                 [20, 450, 800, 20, WHITE] #bottom
                 
                 ]
  
