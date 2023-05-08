@@ -279,6 +279,30 @@ def goUp(num, roomsList, player):
 
     return current_room, player.rect.x, player.rect.y, num
 
+def createStarsList(roomsList, player):
+    """ This function creates a list of all the stars in the game """
+    starsList = pygame.sprite.Group()
+
+    for room in roomsList:
+        if room in player.accessible_rooms:
+            # Calculate the maximum x and y values for the room
+            max_x = room.x + room.width - 10
+            max_y = room.y + room.height - 10
+
+            # Generate a random number of stars to place in the room (between 1 and 3)
+            num_stars = random.randint(1, 3)
+
+            for i in range(num_stars):
+                # Generate a random position for the star within the room
+                star_x = random.randint(room.x + 10, max_x)
+                star_y = random.randint(room.y + 10, max_y)
+
+                # Create the star and add it to the list
+                star = Star(star_x, star_y)
+                starsList.add(star)
+
+    return starsList
+
 
 def main():
     """Uses the functions, classes, and other methods to setup and create the game"""
