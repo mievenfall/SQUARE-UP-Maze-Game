@@ -365,7 +365,6 @@ def main():
     roomsList = createRoomsList()
  
     current_room_no = 0
-    
     current_room = roomsList[current_room_no]
 
     #Keep track of how many stars the player has collected
