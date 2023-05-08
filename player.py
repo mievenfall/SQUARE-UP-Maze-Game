@@ -62,3 +62,17 @@ class Player(pygame.sprite.Sprite):
                 self.rect.bottom = block.rect.top
             else:
                 self.rect.top = block.rect.bottom
+ 
+    def update(self):
+        """ Move the player. """
+        self.rect.move_ip(self.changeX, self.changeY)
+
+
+class Star(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = pygame.Surface([10, 10])
+        self.image.fill(GOLD)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y

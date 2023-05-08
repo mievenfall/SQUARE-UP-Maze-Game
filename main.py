@@ -12,25 +12,26 @@ from colors import *
 from wallsRooms import *
 from player import *
 
+player = Player(50,50)
 def createRoomsList():
-    roomsList = [RoomStart(0),
-                 RoomFull(1),
-                 RoomFull(2),
-                 RoomFullTop(3),
-                 RoomFull(4),
-                 RoomFullLeft(5),
-                 RoomFullTop(6),
-                 RoomFullTopBottom(7),
-                 RoomFullTop(8),
-                 RoomFullLeftRight(9),
-                 RoomFull(10),
-                 RoomFullBottom(11),
-                 RoomEmptyTop(12),
-                 RoomEmptyLeft(13),
-                 RoomEmptyLeft(14),
-                 RoomEmptyRight(15),
-                 RoomEmptyBottom(16),
-                 RoomEmptyLeft(17)]
+    roomsList = [RoomStart(0, player),
+                 RoomFull(1, player),
+                 RoomFull(2, player),
+                 RoomFullTop(3, player),
+                 RoomFull(4, player),
+                 RoomFullLeft(5, player),
+                 RoomFullTop(6, player),
+                 RoomFullTopBottom(7, player),
+                 RoomFullTop(8, player),
+                 RoomFullLeftRight(9, player),
+                 RoomFull(10, player),
+                 RoomFullBottom(11, player),
+                 RoomEmptyTop(12, player),
+                 RoomEmptyLeft(13, player),
+                 RoomEmptyLeft(14, player),
+                 RoomEmptyRight(15, player),
+                 RoomEmptyBottom(16, player),
+                 RoomEmptyLeft(17, player)]
     return roomsList    
 
 def topPos(player):
@@ -319,6 +320,30 @@ def goUp(num, roomsList, player):
 
     return current_room, player.rect.x, player.rect.y, num
 
+def createStarsList(roomsList, player):
+    """ This function creates a list of all the stars in the game """
+    starsList = pygame.sprite.Group()
+
+    for room in roomsList:
+        if room in player.accessible_rooms:
+            # Calculate the maximum x and y values for the room
+            max_x = room.x + room.width - 10
+            max_y = room.y + room.height - 10
+
+            # Generate a random number of stars to place in the room (between 1 and 3)
+            num_stars = random.randint(1, 3)
+
+            for i in range(num_stars):
+                # Generate a random position for the star within the room
+                star_x = random.randint(room.x + 10, max_x)
+                star_y = random.randint(room.y + 10, max_y)
+
+                # Create the star and add it to the list
+                star = Star(star_x, star_y)
+                starsList.add(star)
+
+    return starsList
+
 
 def main():
     """Uses the functions, classes, and other methods to setup and create the game"""
@@ -329,7 +354,7 @@ def main():
     screen = pygame.display.set_mode([800, 600])
  
     # Set the title of the window
-    pygame.display.set_caption('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    pygame.display.set_caption('@@@@@@@@@@@@@@@@@@@@@@@ MAZE GAME @@@@@@@@@@@@@@@@@@@@@@@')
  
     # Create the player, along with creating the sprite
     player = Player(50, 50)
@@ -342,7 +367,14 @@ def main():
     current_room_no = 0
     
     current_room = roomsList[current_room_no]
- 
+
+    #Keep track of how many stars the player has collected
+    stars_collected = 0
+    points = 0
+    
+    #Set up font for displaying points
+    font = pygame.font.Font(None, 36) 
+
     clock = pygame.time.Clock()
  
     finishPlay = False
@@ -382,6 +414,10 @@ def main():
         # --- Game Logic ---
  
         player.move(current_room.wallsList)
+
+        #Check if player has collided with a star:
+        star_collisions = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
+        points += len(star_collisions)
  
         #If the player touches the end of either side of the screen, move them into the next/previous room
 
@@ -410,6 +446,8 @@ def main():
         #Draw sprites onto the screen
         movingsprites.draw(screen)
         current_room.wallsList.draw(screen)
+        current_room.star_sprites.draw(screen)
+        current_room.player_sprite.draw(screen)
  
         #Update the display onto the screen
         pygame.display.flip()
