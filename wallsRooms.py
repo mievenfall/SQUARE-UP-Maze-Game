@@ -95,9 +95,7 @@ class RoomFull(Room):
                  [780, 350, 20, 250, WHITE],
 
                  [20, 580, 320, 20, WHITE], #bottom
-                 [450, 580, 330, 20, WHITE], 
-                
-                 [190, 50, 20, 500, BLUE]
+                 [450, 580, 330, 20, WHITE]
                 ]
  
         # Loop through the list. Create the wall, add it to the list
@@ -116,7 +114,29 @@ class RoomFull(Room):
             y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
             star = Star(x, y)
             self.star_sprites.add(star)                   
+
+# START ROOM
+class RoomStart(Room):
+    """This creates all the walls in room 3"""
+    def __init__(self, num):
+        super().__init__()
+        self.num = num
+         #[x, y, width, height, color]
+        walls = [[20, 0, 800, 20, WHITE], #top
+
+                 [0, 0, 20, 600, WHITE], #left
+
+                 [780, 0, 20, 600, WHITE], #right
+
+                 [20, 580, 320, 20, WHITE], #bottom
+                 [450, 580, 330, 20, WHITE]
+                ]
  
+        for item in walls:
+            wall = Wall(item[0], item[1], item[2], item[3], item[4])
+            self.wallsList.add(wall)
+
+
 # FULL TOP ROOM
 class RoomFullTop(Room):
     """This creates all the walls in room 3"""
@@ -132,7 +152,7 @@ class RoomFullTop(Room):
         self.player_sprite.add(player)
 
          #[x, y, width, height, color]
-        walls = [[20, 0, 600, 20, WHITE], #top
+        walls = [[20, 0, 800, 20, WHITE], #top
 
                  [0, 0, 20, 250, WHITE], #left
                  [0, 350, 20, 250, WHITE],
@@ -141,12 +161,7 @@ class RoomFullTop(Room):
                  [780, 350, 20, 250, WHITE],
 
                  [20, 580, 320, 20, WHITE], #bottom
-                 [450, 580, 330, 20, WHITE], 
-
-                 [190, 50, 20, 500, BLUE],
-                 [290, 50, 20, 500, PURPLE],
-
-                 [20, 0, 760, 20, WHITE], #Any walls underneath the white walls are extras
+                 [450, 580, 330, 20, WHITE]
                 ]
  
         for item in walls:
@@ -190,13 +205,7 @@ class RoomFullLeft(Room):
                  [780, 350, 20, 250, WHITE],
 
                  [20, 580, 320, 20, WHITE], #bottom
-                 [450, 580, 330, 20, WHITE], 
-
-                 [190, 50, 20, 500, BLUE],
-                 [290, 50, 20, 500, BLUE],
-                 [390, 50, 20, 500, BLUE],
-                 [490, 50, 20, 500, BLUE],
-                 [590, 50, 20, 500, BLUE]
+                 [450, 580, 330, 20, WHITE]
                 ]
  
         # Loop through the list. Create the wall, add it to the list
@@ -241,9 +250,7 @@ class RoomFullRight(Room):
                  [780, 0, 20, 600, WHITE], #right
 
                  [20, 580, 320, 20, WHITE], #bottom
-                 [450, 580, 330, 20, WHITE], 
-                
-                 [190, 50, 20, 500, BLUE]
+                 [450, 580, 330, 20, WHITE]
                 ]
  
         # Loop through the list. Create the wall, add it to the list
@@ -283,9 +290,7 @@ class RoomFullBottom(Room):
                  [780, 0, 20, 250, WHITE], #right
                  [780, 350, 20, 250, WHITE],
 
-                 [20, 580, 800, 20, WHITE], #bottom
-                
-                 [190, 50, 20, 500, BLUE]
+                 [20, 580, 800, 20, WHITE] #bottom
                 ]
  
         # Loop through the list. Create the wall, add it to the list
@@ -317,13 +322,7 @@ class RoomFullLeftRight(Room):
                  [780, 0, 20, 600, WHITE], #right
 
                  [20, 580, 320, 20, WHITE], #bottom
-                 [450, 580, 330, 20, WHITE], 
-
-                 [190, 50, 20, 500, BLUE],
-                 [290, 50, 20, 500, BLUE],
-                 [390, 50, 20, 500, BLUE],
-                 [490, 50, 20, 500, BLUE],
-                 [590, 50, 20, 500, BLUE]
+                 [450, 580, 330, 20, WHITE]
                 ]
  
         # Loop through the list. Create the wall, add it to the list
@@ -357,7 +356,7 @@ class RoomFullTopBottom(Room):
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
          #[x, y, width, height, color]
-        walls = [[20, 0, 600, 20, WHITE], #top
+        walls = [[20, 0, 800, 20, WHITE], #top
 
                  [0, 0, 20, 250, WHITE], #left
                  [0, 350, 20, 250, WHITE],
@@ -365,12 +364,7 @@ class RoomFullTopBottom(Room):
                  [780, 0, 20, 250, WHITE], #right
                  [780, 350, 20, 250, WHITE],
 
-                 [20, 580, 600, 20, WHITE], #bottom
-
-                 [190, 50, 20, 500, BLUE],
-                 [290, 50, 20, 500, PURPLE],
-
-                 [20, 0, 760, 20, WHITE], #Any walls underneath the white walls are extras
+                 [20, 580, 800, 20, WHITE] #bottom
                 ]
  
         for item in walls:
@@ -407,9 +401,8 @@ class RoomEmptyTop(Room):
 
                  [780, 0, 20, 600, WHITE], #right
 
-                 [20, 580, 600, 20, WHITE], #bottom
+                 [20, 450, 800, 20, WHITE] #bottom
                 
-                 [190, 50, 20, 500, BLUE]
                 ]
  
         # Loop through the list. Create the wall, add it to the list
@@ -426,19 +419,14 @@ class RoomEmptyBottom(Room):
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
          #[x, y, width, height, color]
-        walls = [[20, 0, 600, 20, WHITE], #top
+        walls = [[20, 0, 800, 20, WHITE], #top
 
                  [0, 0, 20, 600, WHITE], #left
 
                  [780, 0, 20, 600, WHITE], #right
 
                  [20, 580, 320, 20, WHITE], #bottom
-                 [450, 580, 330, 20, WHITE], 
-
-                 [190, 50, 20, 500, BLUE],
-                 [290, 50, 20, 500, PURPLE],
-
-                 [20, 0, 760, 20, WHITE], #Any walls underneath the white walls are extras
+                 [450, 580, 330, 20, WHITE]
                 ]
  
         for item in walls:
@@ -454,19 +442,14 @@ class RoomEmptyLeft(Room):
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
          #[x, y, width, height, color]
-        walls = [[20, 0, 600, 20, WHITE], #top
+        walls = [[20, 0, 800, 20, WHITE], #top
 
                  [0, 0, 20, 250, WHITE], #left
                  [0, 350, 20, 250, WHITE],
 
                  [780, 0, 20, 600, WHITE], #right
 
-                 [20, 580, 600, 20, WHITE], #bottom
-
-                 [190, 50, 20, 500, BLUE],
-                 [290, 50, 20, 500, PURPLE],
-
-                 [20, 0, 760, 20, WHITE], #Any walls underneath the white walls are extras
+                 [20, 580, 800, 20, WHITE] #bottom
                 ]
  
         for item in walls:
@@ -482,19 +465,14 @@ class RoomEmptyRight(Room):
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
          #[x, y, width, height, color]
-        walls = [[20, 0, 600, 20, WHITE], #top
+        walls = [[20, 0, 800, 20, WHITE], #top
 
                  [0, 0, 20, 600, WHITE], #left
 
                  [780, 0, 20, 250, WHITE], #right
                  [780, 350, 20, 250, WHITE],
 
-                 [20, 580, 600, 20, WHITE], #bottom
-
-                 [190, 50, 20, 500, BLUE],
-                 [290, 50, 20, 500, PURPLE],
-
-                 [20, 0, 760, 20, WHITE], #Any walls underneath the white walls are extras
+                 [20, 580, 800, 20, WHITE] #bottom
                 ]
  
         for item in walls:
