@@ -118,9 +118,16 @@ class RoomFull(Room):
 # START ROOM
 class RoomStart(Room):
     """This creates all the walls in room 3"""
-    def __init__(self, num):
+    def __init__(self, num, player):
         super().__init__()
         self.num = num
+        self.width = 800
+        self.height = 600
+        self.player_start_x = 50
+        self.player_start_y = 550
+        self.wall_width = 10
+        self.player_sprite = pygame.sprite.Group()
+        self.player_sprite.add(player)
          #[x, y, width, height, color]
         walls = [[20, 0, 800, 20, WHITE], #top
 
@@ -136,6 +143,17 @@ class RoomStart(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
 
+        # Define star position
+        x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
+        y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
+        self.star_sprites.add(Star(x, y))      
+
+        # Add stars
+        for i in range(6):
+            x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
+            y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
+            star = Star(x, y)
+            self.star_sprites.add(star)
 
 # FULL TOP ROOM
 class RoomFullTop(Room):
