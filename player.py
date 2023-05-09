@@ -10,25 +10,24 @@ import pygame
 from colors import *
 from wallsRooms import *
 
+pygame.init() 
+
 class Player(pygame.sprite.Sprite):
     """ This class represents the user, in the form of a white box (can be changed if necessary) """
  
-    # Set speed vector
-    changeX = 0
-    changeY = 0
  
     def __init__(self, x, y):
         # Call the Sprite's constructor since pygame is a collection of modules to use its set of functions
         super().__init__()
- 
         # Set the height and width of the player, along with set color
-        self.image = pygame.Surface([15, 15])
-        self.image.fill(WHITE)
- 
+        self.image = pygame.image.load('jennienpc.png')
+        self.image = pygame.transform.scale(self.image, (50, 50))
         # Make our top-left corner the passed-in location
         self.rect = self.image.get_rect()
         self.rect.y = y
         self.rect.x = x
+        self.changeX = 0
+        self.changeY = 0
  
     #Changes speed of the player
     def changespeed(self, x, y):
@@ -67,6 +66,9 @@ class Player(pygame.sprite.Sprite):
         """ Move the player. """
         self.rect.move_ip(self.changeX, self.changeY)
 
+    def changePlayerImage(self, image_file):
+        """Changes the player image"""
+        self.image = pygame.image.load(image_file).convert_alpha()
 
 class Star(pygame.sprite.Sprite):
     def __init__(self, x, y):

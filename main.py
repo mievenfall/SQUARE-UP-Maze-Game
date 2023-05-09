@@ -13,12 +13,21 @@ from wallsRooms import *
 from player import *
 
 # Create the player, along with creating the sprite
+<<<<<<< HEAD
 player = Player(50, 50)
+=======
+# Load the player image
+player_image = pygame.image.load("jennienpc.png")
+
+# Create the player
+player = Player(70, 70)
+
+>>>>>>> 0bfe51ec321cd146751412e6ec181433f9c4b71f
 movingsprites = pygame.sprite.Group()
 movingsprites.add(player)
 
-
 def createRoomsList():
+
     roomsList = [RoomStart(0, player),
                  RoomFull(1, player),
                  RoomFull(2, player),
@@ -360,11 +369,12 @@ def main():
     # Set the title of the window
     pygame.display.set_caption('@@@@@@@@@@@@@@@@@@@@@@@ MAZE GAME @@@@@@@@@@@@@@@@@@@@@@@')
  
+    
  
     #This list i(s used for toggling between rooms if the user goes through the doors
     roomsList = createRoomsList()
  
-    current_room_no = 0
+    current_room_no = 12
     current_room = roomsList[current_room_no]
 
     #Keep track of how many stars the player has collected
@@ -441,7 +451,8 @@ def main():
 
         #Black background color
         screen.fill(BLACK)
- 
+        screen.blit(player.image, player.rect)
+
         #Draw sprites onto the screen
         movingsprites.draw(screen)
         current_room.wallsList.draw(screen)
