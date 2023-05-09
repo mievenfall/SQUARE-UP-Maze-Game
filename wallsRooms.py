@@ -150,6 +150,7 @@ class RoomStart(Room):
 
 
 # GOAL ROOM
+#WINNER CHICKEN DINNER
 class RoomGoal(Room):
     """This creates all the walls in room 3"""
     def __init__(self, num, player):
@@ -172,6 +173,12 @@ class RoomGoal(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
 
+        self.star_sprites = pygame.sprite.Group()
+        self.star_sprites.add(BigStar(400, 300))  # create a new Star instance at the center of the room
+        
+
+
+
 # FULL TOP ROOM
 class RoomFullTop(Room):
     """This creates all the walls in room 3"""
@@ -183,8 +190,10 @@ class RoomFullTop(Room):
         self.player_start_x = 750
         self.player_start_y = 550
         self.wall_width = 10
+
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
+
 
          #[x, y, width, height, color]
         walls = [[20, 0, 800, 20, PINK], #top

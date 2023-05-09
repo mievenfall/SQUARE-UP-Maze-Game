@@ -42,7 +42,9 @@ def createRoomsList():
                  RoomEmptyRight(15, player),
                  RoomEmptyBottom(16, player),
                  RoomGoal(17, player)]
-    return roomsList    
+    return roomsList
+
+   
 
 def topPos(player):
     return 390, 50
@@ -363,19 +365,21 @@ def main():
     screen = pygame.display.set_mode([800, 600])
  
     # Set the title of the window
-    pygame.display.set_caption('@@@@@@@@@@@@@@@@@@@@@@@ MAZE GAME @@@@@@@@@@@@@@@@@@@@@@@')
+    pygame.display.set_caption('SQUARED UP: MAZE GAME')
  
     
  
-    #This list i(s used for toggling between rooms if the user goes through the doors
+    #This list is used for toggling between rooms if the user goes through the doors
     roomsList = createRoomsList()
- 
+    total_stars = sum([len(room.star_sprites) for room in roomsList])
+
     current_room_no = 0
     current_room = roomsList[current_room_no]
 
     #Keep track of how many stars the player has collected
     stars_collected = 0
     points = 0
+    newPoint = 0
     
     #Set up font for displaying points
     font = pygame.font.Font(None, 36) 
@@ -383,8 +387,11 @@ def main():
     clock = pygame.time.Clock()
  
     finishPlay = False
+
+    #Initialize flag for goal room reached
+    congratulations = False
  
-    while not finishPlay:
+    while not finishPlay and points < total_stars:
  
         # --- Event Processing ---
  
@@ -423,6 +430,7 @@ def main():
         #Check if player has collided with a star:
         star_collisions = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
         points += len(star_collisions)
+        prev_point = points
  
         #If the player touches the end of either side of the screen, move them into the next/previous room
 
@@ -447,7 +455,7 @@ def main():
 
         #Black background color
         screen.fill(BLACK)
-        screen.blit(player.image, player.rect)
+        #screen.blit(player.image, player.rect)
 
         #Draw sprites onto the screen
         movingsprites.draw(screen)
@@ -455,15 +463,55 @@ def main():
         current_room.star_sprites.draw(screen)
         current_room.player_sprite.draw(screen)
 
-        font = pygame.font.Font(None, 36)
-        text = font.render(f"Points: {points}", True, PINK)
-        screen.blit(text, (30, 30))
-        #Update the display onto the screen
+        # Check for collision with goal room
+        if current_room == roomsList[17]:
+            # Draw stars onto the screen
+            current_room.star_sprites.draw(screen)
+            
+            # Check for collision with stars
+            star_collide = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
+            if len(star_collide) > 0:
+                stars_collected += 1
+                newPoint = prev_point * 2 #times 2 score when hitting the last Big Star
+
+            # Check if all stars have been collected
+            if stars_collected == len(current_room.star_sprites):
+                congratulations = True
+                finishPlay = True
+
+        # Display congratulations message
+        if congratulations:
+            #new screen
+            screen.fill(BLACK)
+            font = pygame.font.Font(None, 34)
+            text1 = font.render("Congratulations!", True, VIOLET)
+            text1_rect = text1.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - 50))
+            screen.blit(text1, text1_rect)
+
+            font = pygame.font.Font(None, 30)
+            text2 = font.render("You have reached the goal room!", True, VIOLET)
+            text2_rect = text2.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 50))
+            screen.blit(text2, text2_rect)
+
+            # Display score in the middle of the screen
+            font = pygame.font.Font(None, 34)
+            text3 = font.render(f"Score: {newPoint}", True, VIOLET)
+            text3_rect = text3.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
+            screen.blit(text3, text3_rect)
+
+            pygame.display.flip()
+            pygame.time.wait(10000)
+
+        #Display score at left corner
+        if not congratulations:
+            font = pygame.font.Font(None, 36)
+            text = font.render(f"Points: {points}", True, PINK)
+            screen.blit(text, (30, 30))
+
         pygame.display.flip()
- 
-        #Max 60 fps
         clock.tick(60)
- 
+
+
     pygame.quit()
  
 if __name__ == "__main__":
