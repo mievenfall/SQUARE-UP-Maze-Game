@@ -67,12 +67,14 @@ class Room(object):
 
     def add_star(self, star):
         self.star_sprites.add(star)
+
+
  
 
 # 4 WALLS ROOM
 class RoomFull(Room):
     """This creates all the walls in room"""  
-    def __init__(self, num, player):
+    def __init__(self, num, player,):
         super().__init__()
         self.num = num
         self.width = 800
@@ -142,16 +144,18 @@ class RoomStart(Room):
             self.wallsList.add(wall)
 
         # Define star position
-        x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-        y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-        self.star_sprites.add(Star(x, y))      
-
-        # Add stars
-        for i in range(6):
             x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
             y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-            star = Star(x, y)
-            self.star_sprites.add(star)
+            self.star_sprites.add(Star(x, y))      
+
+            # Add stars
+            for i in range(6):
+                x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
+                y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
+                star = Star(x, y)
+                self.star_sprites.add(star)
+
+
 
 
 # GOAL ROOM

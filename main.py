@@ -337,8 +337,8 @@ def createStarsList(roomsList, player):
     for room in roomsList:
         if room in player.accessible_rooms:
             # Calculate the maximum x and y values for the room
-            max_x = room.x + room.width - 10
-            max_y = room.y + room.height - 10
+            max_x = room.x + room.width - 50
+            max_y = room.y + room.height - 50
 
             # Generate a random number of stars to place in the room (between 1 and 3)
             num_stars = random.randint(1, 3)
@@ -353,7 +353,6 @@ def createStarsList(roomsList, player):
                 starsList.add(star)
 
     return starsList
-
 
 def main():
     """Uses the functions, classes, and other methods to setup and create the game"""
