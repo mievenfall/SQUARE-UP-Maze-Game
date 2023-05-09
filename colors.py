@@ -7,7 +7,7 @@ import pygame
 #Can be modified to different colors
 BLACK = (0, 0, 0)
 PINK = (255, 143, 173)
-VIOLET = (205, 164, 222)
+ROSE = (242, 107, 138)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)

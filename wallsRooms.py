@@ -50,6 +50,8 @@ class Room(object):
         self.wall_width = 40
         self.player_start_x = 0
         self.player_start_y = 0
+
+    
         
 
     def add_wall(self, wall):

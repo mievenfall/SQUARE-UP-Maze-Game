@@ -472,6 +472,12 @@ def main():
             
             # Check for collision with stars
             star_collide = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
+
+            #Display text to tell user the big prize at the WIN ROOM:
+            font = pygame.font.Font(None, 24)
+            text = font.render("Double your score with the big prize", True, ROSE)
+            screen.blit(text, (screen.get_width() // 2 - text.get_width() // 2, 35))
+
             if len(star_collide) > 0:
                 stars_collected += 1
                 total_points += len(star_collide)
@@ -485,19 +491,19 @@ def main():
         if congratulations:
             #new screen
             screen.fill(BLACK)
-            font = pygame.font.Font(None, 34)
-            text1 = font.render("Congratulations!", True, VIOLET)
+            font = pygame.font.Font(None, 40)
+            text1 = font.render("Congratulations!", True, ROSE)
             text1_rect = text1.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - 50))
             screen.blit(text1, text1_rect)
 
             font = pygame.font.Font(None, 30)
-            text2 = font.render("You have reached the goal room!", True, VIOLET)
+            text2 = font.render("You have reached the goal room!", True, ROSE)
             text2_rect = text2.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 50))
             screen.blit(text2, text2_rect)
 
             # Display score in the middle of the screen
             font = pygame.font.Font(None, 34)
-            text3 = font.render(f"New Score: {total_points*2}", True, VIOLET)   #Times 2 score
+            text3 = font.render(f"New Score: {total_points*2}", True, ROSE)   #Times 2 score
             text3_rect = text3.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
             screen.blit(text3, text3_rect)
 
@@ -505,6 +511,7 @@ def main():
             current_room.wallsList.draw(screen)
             pygame.display.flip()
             pygame.time.wait(20000)
+            
 
         #Display score at left corner
         if not congratulations:
