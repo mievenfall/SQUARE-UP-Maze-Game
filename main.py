@@ -454,7 +454,10 @@ def main():
         current_room.wallsList.draw(screen)
         current_room.star_sprites.draw(screen)
         current_room.player_sprite.draw(screen)
- 
+
+        font = pygame.font.Font(None, 36)
+        text = font.render(f"Points: {points}", True, PINK)
+        screen.blit(text, (30, 30))
         #Update the display onto the screen
         pygame.display.flip()
  

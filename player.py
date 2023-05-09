@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         # Set the height and width of the player, along with set color
         self.image = pygame.image.load('jennienpc.png')
-        self.image = pygame.transform.scale(self.image, (65, 65))
+        self.image = pygame.transform.scale(self.image, (55, 55))
         # Make our top-left corner the passed-in location
         self.rect = self.image.get_rect()
         self.rect.y = y

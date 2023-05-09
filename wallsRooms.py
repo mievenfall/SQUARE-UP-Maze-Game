@@ -140,7 +140,7 @@ class RoomStart(Room):
             self.star_sprites.add(Star(x, y))      
 
             # Add stars
-            for i in range(6):
+            for i in range(5):
                 x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
                 y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
                 star = Star(x, y)
