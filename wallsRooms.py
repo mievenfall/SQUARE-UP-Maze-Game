@@ -47,7 +47,7 @@ class Room(object):
         self.star_sprites = pygame.sprite.Group()
         self.width = 800
         self.height = 600
-        self.wall_width = 20
+        self.wall_width = 40
         self.player_start_x = 0
         self.player_start_y = 0
         
