@@ -71,8 +71,10 @@ class Player(pygame.sprite.Sprite):
 class Star(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.Surface([10, 10])
-        self.image.fill(GOLD)
+        self.image = pygame.image.load('coin.png') 
+        self.image = pygame.transform.scale(self.image, (20, 20)) 
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+
