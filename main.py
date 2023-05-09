@@ -12,7 +12,12 @@ from colors import *
 from wallsRooms import *
 from player import *
 
-player = Player(50,50)
+ # Create the player, along with creating the sprite
+player = Player(50, 50)
+movingsprites = pygame.sprite.Group()
+movingsprites.add(player)
+
+
 def createRoomsList():
     roomsList = [RoomStart(0, player),
                  RoomFull(1, player),
@@ -31,7 +36,7 @@ def createRoomsList():
                  RoomEmptyLeft(14, player),
                  RoomEmptyRight(15, player),
                  RoomEmptyBottom(16, player),
-                 RoomEmptyLeft(17, player)]
+                 RoomGoal(17, player)]
     return roomsList    
 
 def topPos(player):
@@ -356,10 +361,6 @@ def main():
     # Set the title of the window
     pygame.display.set_caption('@@@@@@@@@@@@@@@@@@@@@@@ MAZE GAME @@@@@@@@@@@@@@@@@@@@@@@')
  
-    # Create the player, along with creating the sprite
-    player = Player(50, 50)
-    movingsprites = pygame.sprite.Group()
-    movingsprites.add(player)
  
     #This list i(s used for toggling between rooms if the user goes through the doors
     roomsList = createRoomsList()

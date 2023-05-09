@@ -155,6 +155,30 @@ class RoomStart(Room):
             star = Star(x, y)
             self.star_sprites.add(star)
 
+
+# GOAL ROOM
+class RoomGoal(Room):
+    """This creates all the walls in room 3"""
+    def __init__(self, num, player):
+        super().__init__()
+        self.num = num
+        self.player_sprite = pygame.sprite.Group()
+        self.player_sprite.add(player)
+         #[x, y, width, height, color]
+        walls = [[20, 0, 800, 20, WHITE], #top
+
+                 [0, 0, 20, 250, WHITE], #left
+                 [0, 350, 20, 250, WHITE],
+
+                 [780, 0, 20, 600, WHITE], #right
+
+                 [20, 580, 800, 20, WHITE] #bottom
+                ]
+ 
+        for item in walls:
+            wall = Wall(item[0], item[1], item[2], item[3], item[4])
+            self.wallsList.add(wall)
+
 # FULL TOP ROOM
 class RoomFullTop(Room):
     """This creates all the walls in room 3"""
@@ -412,15 +436,14 @@ class RoomEmptyTop(Room):
         # Make the walls. (x-axis, y-axis, width, height)
  
         # This is a list of walls. Each is in the form [x, y, width, height]
-        walls = [[20, 0, 320, 20, WHITE], #top
-                 [450, 0, 330, 20, WHITE],
+        walls = [[0, 0, 340, 20, WHITE], #top
+                 [450, 0, 350, 20, WHITE],
 
-                 [0, 0, 20, 600, WHITE], #left
+                 [320, 0, 20, 450, WHITE], #left
 
-                 [780, 0, 20, 600, WHITE], #right
+                 [450, 0, 20, 450, WHITE], #right
 
-                 [20, 450, 800, 20, WHITE] #bottom
-                
+                 [320, 450, 150, 20, WHITE] #bottom
                 ]
  
         # Loop through the list. Create the wall, add it to the list
@@ -437,14 +460,14 @@ class RoomEmptyBottom(Room):
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
          #[x, y, width, height, color]
-        walls = [[20, 0, 800, 20, WHITE], #top
+        walls = [[320, 130, 150, 20, WHITE], #top
 
-                 [0, 0, 20, 600, WHITE], #left
+                 [320, 130, 20, 450, WHITE], #left
 
-                 [780, 0, 20, 600, WHITE], #right
+                 [450, 130, 20, 450, WHITE], #right
 
-                 [20, 580, 320, 20, WHITE], #bottom
-                 [450, 580, 330, 20, WHITE]
+                 [0, 580, 340, 20, WHITE], #bottom
+                 [450, 580, 350, 20, WHITE]
                 ]
  
         for item in walls:
@@ -460,14 +483,14 @@ class RoomEmptyLeft(Room):
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
          #[x, y, width, height, color]
-        walls = [[20, 0, 800, 20, WHITE], #top
+        walls = [[20, 230, 550, 20, WHITE], #top
 
                  [0, 0, 20, 250, WHITE], #left
                  [0, 350, 20, 250, WHITE],
 
-                 [780, 0, 20, 600, WHITE], #right
+                 [550, 250, 20, 100, WHITE], #right
 
-                 [20, 580, 800, 20, WHITE] #bottom
+                 [20, 350, 550, 20, WHITE] #bottom
                 ]
  
         for item in walls:
@@ -483,14 +506,14 @@ class RoomEmptyRight(Room):
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
          #[x, y, width, height, color]
-        walls = [[20, 0, 800, 20, WHITE], #top
+        walls = [[250, 230, 550, 20, WHITE], #top
 
-                 [0, 0, 20, 600, WHITE], #left
+                 [250, 250, 20, 100, WHITE], #left
 
                  [780, 0, 20, 250, WHITE], #right
                  [780, 350, 20, 250, WHITE],
 
-                 [20, 580, 800, 20, WHITE] #bottom
+                 [250, 350, 550, 20, WHITE] #bottom
                 ]
  
         for item in walls:
