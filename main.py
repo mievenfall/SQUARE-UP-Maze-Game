@@ -171,7 +171,7 @@ def goRight(num, roomsList, player):
     # ROOM 8 -> ROOM 10
     elif num == 8:
         num = 10 
-        player.rect.x, player.rect.y = botPos(player)
+        player.rect.x, player.rect.y = rightPos(player)
 
     # ROOM 9 xxx
 
