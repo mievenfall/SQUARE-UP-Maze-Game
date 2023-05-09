@@ -6,7 +6,7 @@ import random
 import pygame
 from pygame.sprite import Group
 from colors import *
-from player import Player
+from player import *
  
 #Inherits the sprite class
 class Wall(pygame.sprite.Sprite): 
@@ -29,16 +29,7 @@ class Wall(pygame.sprite.Sprite):
         #Instatiate a Player object with given x and y values:
         self.player = Player(x, y)
  
-class Star(pygame.sprite.Sprite):
-    SIZE = 10
 
-    def __init__(self, x, y):
-        super().__init__()
-        self.image = pygame.Surface([self.SIZE, self.SIZE])
-        self.image.fill(GOLD)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
  
 #Inherits the object class
 class Room(object):

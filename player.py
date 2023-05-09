@@ -71,6 +71,7 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load(image_file).convert_alpha()
 
 class Star(pygame.sprite.Sprite):
+    SIZE = 10
     def __init__(self, x, y):
         super().__init__()
         self.image = pygame.image.load('coin.png') 
