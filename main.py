@@ -41,7 +41,7 @@ def createRoomsList():
                  RoomEmptyLeft(14, player),
                  RoomEmptyRight(15, player),
                  RoomEmptyBottom(16, player),
-                 RoomEmptyLeft(17, player)]
+                 RoomGoal(17, player)]
     return roomsList    
 
 def topPos(player):
