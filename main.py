@@ -371,7 +371,7 @@ def main():
     #This list i(s used for toggling between rooms if the user goes through the doors
     roomsList = createRoomsList()
  
-    current_room_no = 12
+    current_room_no = 0
     current_room = roomsList[current_room_no]
 
     #Keep track of how many stars the player has collected
