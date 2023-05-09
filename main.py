@@ -379,6 +379,7 @@ def main():
     #Keep track of how many stars the player has collected
     stars_collected = 0
     points = 0
+    total_points = 0
     newPoint = 0
     
     #Set up font for displaying points
@@ -429,8 +430,9 @@ def main():
 
         #Check if player has collided with a star:
         star_collisions = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
-        points += len(star_collisions)
-        prev_point = points
+        points = len(star_collisions)
+        total_points += points
+
  
         #If the player touches the end of either side of the screen, move them into the next/previous room
 
@@ -472,7 +474,7 @@ def main():
             star_collide = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
             if len(star_collide) > 0:
                 stars_collected += 1
-                newPoint = prev_point * 2 #times 2 score when hitting the last Big Star
+                total_points += len(star_collide)
 
             # Check if all stars have been collected
             if stars_collected == len(current_room.star_sprites):
@@ -495,17 +497,19 @@ def main():
 
             # Display score in the middle of the screen
             font = pygame.font.Font(None, 34)
-            text3 = font.render(f"Score: {newPoint}", True, VIOLET)
+            text3 = font.render(f"New Score: {total_points*2}", True, VIOLET)   #Times 2 score
             text3_rect = text3.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
             screen.blit(text3, text3_rect)
 
+            #Update walls color and draw them on the screen
+            current_room.wallsList.draw(screen)
             pygame.display.flip()
-            pygame.time.wait(10000)
+            pygame.time.wait(20000)
 
         #Display score at left corner
         if not congratulations:
             font = pygame.font.Font(None, 36)
-            text = font.render(f"Points: {points}", True, PINK)
+            text = font.render(f"Points: {total_points}", True, PINK)
             screen.blit(text, (30, 30))
 
         pygame.display.flip()
