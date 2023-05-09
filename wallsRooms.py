@@ -45,10 +45,12 @@ class Room(object):
         self.wallsList = pygame.sprite.Group()
         self.enemy_sprites = pygame.sprite.Group()
         self.star_sprites = pygame.sprite.Group()
-        self.width = 0
-        self.height = 0
+        self.width = 800
+        self.height = 600
+        self.wall_width = 20
         self.player_start_x = 0
         self.player_start_y = 0
+        
 
     def add_wall(self, wall):
         self.wallsList.add(wall)
@@ -59,20 +61,22 @@ class Room(object):
     def add_star(self, star):
         self.star_sprites.add(star)
 
+    def addStar(self):
+        # Add stars
+        for i in range(random.randint(5,15)):
+            x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
+            y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
+            star = Star(x, y)
+            self.star_sprites.add(star)     
 
  
 
 # 4 WALLS ROOM
 class RoomFull(Room):
     """This creates all the walls in room"""  
-    def __init__(self, num, player,):
+    def __init__(self, num, player):
         super().__init__()
         self.num = num
-        self.width = 800
-        self.height = 600
-        self.player_start_x = 50
-        self.player_start_y = 50
-        self.wall_width = 10
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
         # Make the walls. (x-axis, y-axis, width, height)
@@ -90,23 +94,11 @@ class RoomFull(Room):
                  [20, 580, 320, 20, PINK], #bottom
                  [450, 580, 330, 20, PINK]
                 ]
- 
-        # Loop through the list. Create the wall, add it to the list
-        for item in walls: #[x, y, width, height]
+        for item in walls:
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
-         
-        # Define star position
-        x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-        y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-        self.star_sprites.add(Star(x, y)) 
-        
-        # Add stars
-        for i in range(5):
-            x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-            y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-            star = Star(x, y)
-            self.star_sprites.add(star)                   
+ 
+        super().addStar()                 
 
 # START ROOM
 class RoomStart(Room):
@@ -114,9 +106,6 @@ class RoomStart(Room):
     def __init__(self, num, player):
         super().__init__()
         self.num = num
-        self.width = 800
-        self.height = 600
-        self.wall_width = 10
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
          #[x, y, width, height, color]
@@ -134,17 +123,7 @@ class RoomStart(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
 
-        # Define star position
-            x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-            y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-            self.star_sprites.add(Star(x, y))      
-
-            # Add stars
-            for i in range(5):
-                x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-                y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-                star = Star(x, y)
-                self.star_sprites.add(star)
+        super().addStar()  
 
 
 
@@ -178,11 +157,6 @@ class RoomFullTop(Room):
     def __init__(self, num, player):
         super().__init__()
         self.num = num
-        self.width = 800
-        self.height = 600
-        self.player_start_x = 750
-        self.player_start_y = 550
-        self.wall_width = 10
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
 
@@ -203,17 +177,8 @@ class RoomFullTop(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
 
-        # Define star position
-        x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-        y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-        self.star_sprites.add(Star(x, y))      
+        super().addStar()  
 
-        # Add stars
-        for i in range(6):
-            x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-            y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-            star = Star(x, y)
-            self.star_sprites.add(star)
 
 # FULL LEFT ROOM
 class RoomFullLeft(Room): 
@@ -221,11 +186,6 @@ class RoomFullLeft(Room):
     def __init__(self, num, player):
         super().__init__()
         self.num = num
-        self.width = 800
-        self.height = 600
-        self.player_start_x = 50
-        self.player_start_y = 550
-        self.wall_width = 10
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
         # Make the walls. (x-axis, y-axis, width, height)
@@ -248,29 +208,14 @@ class RoomFullLeft(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
 
-        # Define star position
-        x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-        y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-        self.star_sprites.add(Star(x, y))
-
-        # Add stars
-        for i in range(5):
-            x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-            y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-            star = Star(x, y)
-            self.star_sprites.add(star)
-
+        super().addStar()  
+    
 # FULL RIGHT ROOM
 class RoomFullRight(Room):
     """This creates all the walls in room"""  
     def __init__(self, num, player):
         super().__init__()
         self.num = num
-        self.width = 800
-        self.height = 600
-        self.player_start_x = 50
-        self.player_start_y = 550
-        self.wall_width = 10
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
         # Make the walls. (x-axis, y-axis, width, height)
@@ -293,17 +238,7 @@ class RoomFullRight(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
 
-        # Define star position
-        x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-        y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-        self.star_sprites.add(Star(x, y))
-
-        # Add stars
-        for i in range(4):
-            x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-            y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-            star = Star(x, y)
-            self.star_sprites.add(star)
+        super().addStar()  
 
 # FULL BOTTOM ROOM
 class RoomFullBottom(Room):
@@ -332,6 +267,8 @@ class RoomFullBottom(Room):
         for item in walls: #[x, y, width, height]
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
+
+        super().addStar()  
  
 # FULL LEFT RIGHT ROOM
 class RoomFullLeftRight(Room): 
@@ -339,11 +276,6 @@ class RoomFullLeftRight(Room):
     def __init__(self, num, player):
         super().__init__()
         self.num = num
-        self.width = 800
-        self.height = 600
-        self.player_start_x = 50
-        self.player_start_y = 550
-        self.wall_width = 10
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
         # Make the walls. (x-axis, y-axis, width, height)
@@ -365,17 +297,7 @@ class RoomFullLeftRight(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
 
-        # Define star position
-        x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-        y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-        self.star_sprites.add(Star(x, y))
-
-        # Add stars
-        for i in range(4):
-            x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-            y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-            star = Star(x, y)
-            self.star_sprites.add(star) 
+        super().addStar()  
 
 # FULL TOP BOTTOM ROOM
 class RoomFullTopBottom(Room):
@@ -383,11 +305,6 @@ class RoomFullTopBottom(Room):
     def __init__(self, num, player):
         super().__init__()
         self.num = num
-        self.width = 800
-        self.height = 600
-        self.player_start_x = 50
-        self.player_start_y = 550
-        self.wall_width = 10
         self.player_sprite = pygame.sprite.Group()
         self.player_sprite.add(player)
          #[x, y, width, height, color]
@@ -406,19 +323,8 @@ class RoomFullTopBottom(Room):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
 
-        # Define star position
-        x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-        y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-        self.star_sprites.add(Star(x, y))
-
-        # Add stars
-        for i in range(4):
-            x = random.randint(self.wall_width, self.width - self.wall_width - Star.SIZE)
-            y = random.randint(self.wall_width, self.height - self.wall_width - Star.SIZE)
-            star = Star(x, y)
-            self.star_sprites.add(star)
-
-# EMPTY TOP ROOM
+        super().addStar()  
+        
 class RoomEmptyTop(Room):
     """This creates all the walls in room"""  
     def __init__(self, num, player):
@@ -512,10 +418,6 @@ class RoomEmptyRight(Room):
         for item in walls:
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wallsList.add(wall)
-
-        # Add player to the list
-        self.player_sprite = pygame.sprite.Group()
-        self.player_sprite.add(player)
 
 
 class Decor(pygame.sprite.Sprite):
