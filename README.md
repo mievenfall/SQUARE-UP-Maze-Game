@@ -11,7 +11,7 @@ Members:
 
 
 ----DESCRIPTION OF PROJECT---- 
-
+We have decided to create a maze where you have to find the goal room whilst also collecting as much coins as you can get. The maze is full of intricate and confusing paths, so you might end up lost while trying to find the goal.
 
 
 ----INSTALLATION----
@@ -36,7 +36,13 @@ https://www.pygame.org/wiki/GettingStarted
 
 
 
----- Getting Started----
+----Getting Started----
+The game is simple: try to find the goal room while collecting as much coins as you can. Try to keep notes on where each path leads to where, as some paths might bring you back to where you started.
+
+
+
+----Controls----
+WASD - Move
 
 
 
