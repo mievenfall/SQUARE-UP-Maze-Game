@@ -86,7 +86,7 @@ class BigStar(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         self.image = pygame.image.load('pics/coin.png') 
-        self.image = pygame.transform.scale(self.image, (150, 150)) 
+        self.image = pygame.transform.scale(self.image, (200, 200)) 
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -98,7 +98,7 @@ class MenuScreen:
         self.height = height
         # Assuming button_width and button_height are the new dimensions for the start button
         self.start_button = Button(start_img, self.width/2 - button_width/2, self.height/2 - button_height, 200, 150)
-        #self.exit_button = Button(exit_img, width/2 - button_width/2, height/2 + button_height/2 + 50, button_width, button_height)
+        self.exit_button = Button(exit_img, width/2 - button_width/2, height/2 + button_height/2 + 50, button_width, button_height)
         self.active = True
         self.font = pygame.font.Font(None, 36)  
 
@@ -107,16 +107,16 @@ class MenuScreen:
             pos = pygame.mouse.get_pos()
             if self.start_button.rect.collidepoint(pos):
                 self.active = False
-            # elif self.exit_button.rect.collidepoint(pos):
-            #     pygame.quit()
-            #     sys.exit()
+            elif self.exit_button.rect.collidepoint(pos):
+                pygame.quit()
+                sys.exit()
 
     def draw(self):
         self.screen.fill(BLACK)
 
         # Draw the buttons
         self.start_button.draw(self.screen)
-        #self.exit_button.draw(self.screen)
+        self.exit_button.draw(self.screen)
 
         # Render the text
         text = self.font.render("Welcome to SQUARED UP: Maze Game", True, (ROSE))
@@ -138,37 +138,48 @@ class EndScreen:
         self.width = width
         self.height = height
         # Assuming button_width and button_height are the new dimensions for the start button
-        self.start_button = Button(restart_img, self.width/2 - button_width/2, self.height/2 - button_height, 200, 150)
-        self.quit_button = Button(quit_img, width/2 - button_width/2, height/2 + button_height/2 + 50, button_width, button_height)
-        self.active = True
+        self.restart_button = Button(restart_img, width//2 -75, 388, button_width-13, button_height-13)
+        self.quit_button = Button(quit_img, width//2 +25, 380, button_width, button_height)
+        self.active = False
+        self.restart = False
         self.font = pygame.font.Font(None, 36)  
 
     def handle_input(self, event):
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
-            if self.start_button.rect.collidepoint(pos):
+            if self.restart_button.rect.collidepoint(pos):
                 self.active = False
+                self.restart = True
+                # player.rect.x = 70
+                # player.rect.y = 70
             elif self.quit_button.rect.collidepoint(pos):
                 pygame.quit()
-                sys.quit()
+                sys.exit()
 
-    def draw(self):
+    def draw(self, total_points):
+        #new screen
         self.screen.fill(BLACK)
+        font = pygame.font.Font(None, 40)
+        text1 = font.render("Congratulations!", True, ROSE)
+        text1_rect = text1.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2 - 50))
+        self.screen.blit(text1, text1_rect)
 
+        font = pygame.font.Font(None, 30)
+        text2 = font.render("You have reached the goal room!", True, ROSE)
+        text2_rect = text2.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2 + 50))
+        self.screen.blit(text2, text2_rect)
+
+        # Display score in the middle of the screen
+        font = pygame.font.Font(None, 34)
+        text3 = font.render(f"New Score: {total_points*2}", True, ROSE)   #Times 2 score
+        text3_rect = text3.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
+        self.screen.blit(text3, text3_rect)
+
+        
         # Draw the buttons
-        self.start_button.draw(self.screen)
+        self.restart_button.draw(self.screen)
         self.quit_button.draw(self.screen)
 
-        # Render the text
-        text = self.font.render("Welcome to SQUARED UP: Maze Game", True, (ROSE))
-
-        # Determine the position for the text. It should be centered horizontally,
-        # and located above the start button (minus additional space)
-        text_x = self.width / 2 - text.get_width() / 2
-        text_y = self.start_button.rect.y - text.get_height() - 20  # 20 is the additional space
-
-        # Draw the text onto the screen
-        self.screen.blit(text, (text_x, text_y))
 
         pygame.display.flip()
 

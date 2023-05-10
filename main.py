@@ -12,39 +12,6 @@ from colors import *
 from wallsRooms import *
 from player import *
 
-# Create the player, along with creating the sprite
-# Load the player image
-player_image = pygame.image.load("pics/jennienpc.png")
-
-# Create the player
-player = Player(70, 70)
-
-movingsprites = pygame.sprite.Group()
-movingsprites.add(player)
-
-def createRoomsList():
-
-    roomsList = [RoomStart(0, player),
-                 RoomFull(1, player),
-                 RoomFull(2, player),
-                 RoomFullTop(3, player),
-                 RoomFull(4, player),
-                 RoomFullLeft(5, player),
-                 RoomFullTop(6, player),
-                 RoomFullTopBottom(7, player),
-                 RoomFullTop(8, player),
-                 RoomFullLeftRight(9, player),
-                 RoomFull(10, player),
-                 RoomFullBottom(11, player),
-                 RoomEmptyTop(12, player),
-                 RoomEmptyLeft(13, player),
-                 RoomEmptyLeft(14, player),
-                 RoomEmptyRight(15, player),
-                 RoomEmptyBottom(16, player),
-                 RoomGoal(17, player)]
-    return roomsList
-
-   
 
 def topPos(player):
     return 390, 50
@@ -332,30 +299,6 @@ def goUp(num, roomsList, player):
 
     return current_room, player.rect.x, player.rect.y, num
 
-def createStarsList(roomsList, player):
-    """ This function creates a list of all the stars in the game """
-    starsList = pygame.sprite.Group()
-
-    for room in roomsList:
-        if room in player.accessible_rooms:
-            # Calculate the maximum x and y values for the room
-            max_x = room.x + room.width - 50
-            max_y = room.y + room.height - 50
-
-            # Generate a random number of stars to place in the room (between 1 and 3)
-            num_stars = random.randint(1, 3)
-
-            for i in range(num_stars):
-                # Generate a random position for the star within the room
-                star_x = random.randint(room.x + 10, max_x)
-                star_y = random.randint(room.y + 10, max_y)
-
-                # Create the star and add it to the list
-                star = Star(star_x, star_y)
-                starsList.add(star)
-
-    return starsList
-
 
 
 def main():
@@ -368,11 +311,26 @@ def main():
  
     # Set the title of the window
     pygame.display.set_caption('SQUARED UP: MAZE GAME')
+
+    # Create the player, along with creating the sprite
+    # Load the player image
+    player_image = pygame.image.load("pics/jennienpc.png")
+
+    # Create the player
+    player = Player(70, 70)
+
+    movingsprites = pygame.sprite.Group()
+    movingsprites.add(player)
+
     
     start_button_img = "pics/start.png"
     exit_button_img = "pics/exit.png"
+    restart_button_img = "pics/restart.png"
+    quit_button_img = "pics/quit.png"
     
     menu_screen = MenuScreen(screen, 800, 600, start_button_img, exit_button_img, 200, 75)
+    end_screen = EndScreen(screen, 800, 600, restart_button_img, quit_button_img, 50, 50)
+    
     # Load sound files
     pygame.mixer.music.load('background.mp3')
     pygame.mixer.music.play(-1)
@@ -388,7 +346,25 @@ def main():
     speaker_rect.topright = (screen.get_width() - 30, 30)
  
     #This list is used for toggling between rooms if the user goes through the doors
-    roomsList = createRoomsList()
+    roomsList = [RoomStart(0, player),
+                 RoomFull(1, player),
+                 RoomFull(2, player),
+                 RoomFullTop(3, player),
+                 RoomFull(4, player),
+                 RoomFullLeft(5, player),
+                 RoomFullTop(6, player),
+                 RoomFullTopBottom(7, player),
+                 RoomFullTop(8, player),
+                 RoomFullLeftRight(9, player),
+                 RoomFull(10, player),
+                 RoomFullBottom(11, player),
+                 RoomEmptyTop(12, player),
+                 RoomEmptyLeft(13, player),
+                 RoomEmptyLeft(14, player),
+                 RoomEmptyRight(15, player),
+                 RoomEmptyBottom(16, player),
+                 RoomGoal(17, player)]
+    
     total_stars = sum([len(room.star_sprites) for room in roomsList])
 
     current_room_no = 0
@@ -458,6 +434,9 @@ def main():
             if menu_screen.active:
                 menu_screen.handle_input(event)
 
+            if end_screen.active:
+                end_screen.handle_input(event)
+
         #If on the menu screen, handle input and display the screen
         
 
@@ -474,9 +453,9 @@ def main():
 
             #Display room number text at bottom left corner
             font = pygame.font.Font(None, 32)
-            room_text = font.render(f"Room: {current_room_no + 1}", True, ROSE)
+            room_text = font.render(f"Room: {current_room.num}", True, ROSE)
             room_text_rect = room_text.get_rect()
-            room_text_rect.bottomleft = (650, 550)
+            room_text_rect.bottomleft = (680, 570)
             screen.blit(room_text, room_text_rect)
 
 
@@ -538,37 +517,26 @@ def main():
                     finishPlay = True
 
             if congratulations:
-
-                #new screen
-                screen.fill(BLACK)
-                font = pygame.font.Font(None, 40)
-                text1 = font.render("Congratulations!", True, ROSE)
-                text1_rect = text1.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - 50))
-                screen.blit(text1, text1_rect)
-
-                font = pygame.font.Font(None, 30)
-                text2 = font.render("You have reached the goal room!", True, ROSE)
-                text2_rect = text2.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 50))
-                screen.blit(text2, text2_rect)
-
-                # Display score in the middle of the screen
-                font = pygame.font.Font(None, 34)
-                text3 = font.render(f"New Score: {total_points*2}", True, ROSE)   #Times 2 score
-                text3_rect = text3.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
-                screen.blit(text3, text3_rect)
-
-                #Update walls color and draw them on the screen
-                current_room.wallsList.draw(screen)
-                pygame.display.flip()
-                pygame.time.wait(20000)
+                end_screen.active = True
                 
-
+                
             #Display score at left corner
             if not congratulations:
                 font = pygame.font.Font(None, 36)
                 text = font.render(f"Points: {total_points}", True, PINK)
                 screen.blit(text, (30, 30))
 
+        while end_screen.active:
+            end_screen.draw(total_points)
+            for event in pygame.event.get():
+                 #If user clicks exit button, quit the game
+                if event.type == pygame.QUIT:
+                    finishPlay = True
+                    break
+                if end_screen.active:
+                    end_screen.handle_input(event)
+                    break
+    
         if is_muted:
             screen.blit(speaker_muted_img, speaker_rect)
 
@@ -576,8 +544,10 @@ def main():
         pygame.display.flip()
         clock.tick(60)
 
-
-    pygame.quit()
+    if end_screen.restart is True:
+        main()
+    else:
+        pygame.quit()
  
 if __name__ == "__main__":
     main()
