@@ -14,7 +14,7 @@ from player import *
 
 # Create the player, along with creating the sprite
 # Load the player image
-player_image = pygame.image.load("jennienpc.png")
+player_image = pygame.image.load("pics/jennienpc.png")
 
 # Create the player
 player = Player(70, 70)
@@ -369,8 +369,8 @@ def main():
     # Set the title of the window
     pygame.display.set_caption('SQUARED UP: MAZE GAME')
     
-    start_button_img = "start.png"
-    exit_button_img = "exit.png"
+    start_button_img = "pics/start.png"
+    exit_button_img = "pics/exit.png"
     
     menu_screen = MenuScreen(screen, 800, 600, start_button_img, exit_button_img, 200, 75)
     # Load sound files
@@ -382,7 +382,7 @@ def main():
     is_muted = False
 
     # Load speaker images
-    speaker_muted_img = pygame.image.load('mute.png')
+    speaker_muted_img = pygame.image.load('pics/mute.png')
     speaker_muted_img = pygame.transform.scale(speaker_muted_img, (30, 30))
     speaker_rect = speaker_muted_img.get_rect()
     speaker_rect.topright = (screen.get_width() - 30, 30)
@@ -572,7 +572,7 @@ def main():
         if is_muted:
             screen.blit(speaker_muted_img, speaker_rect)
 
-            
+
         pygame.display.flip()
         clock.tick(60)
 
