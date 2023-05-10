@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite):
         # Call the Sprite's constructor since pygame is a collection of modules to use its set of functions
         super().__init__()
         # Set the height and width of the player, along with set color
-        self.image = pygame.image.load('jennienpc.png')
+        self.image = pygame.image.load('pics/jennienpc.png')
         self.image = pygame.transform.scale(self.image, (55, 55))
         # Make our top-left corner the passed-in location
         self.rect = self.image.get_rect()
@@ -75,7 +75,7 @@ class Star(pygame.sprite.Sprite):
     SIZE = 10
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load('coin.png') 
+        self.image = pygame.image.load('pics/coin.png') 
         self.image = pygame.transform.scale(self.image, (20, 20)) 
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -85,7 +85,7 @@ class BigStar(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load('coin.png') 
+        self.image = pygame.image.load('pics/coin.png') 
         self.image = pygame.transform.scale(self.image, (150, 150)) 
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -98,7 +98,7 @@ class MenuScreen:
         self.height = height
         # Assuming button_width and button_height are the new dimensions for the start button
         self.start_button = Button(start_img, self.width/2 - button_width/2, self.height/2 - button_height, 200, 150)
-        self.exit_button = Button(exit_img, width/2 - button_width/2, height/2 + button_height/2 + 50, button_width, button_height)
+        #self.exit_button = Button(exit_img, width/2 - button_width/2, height/2 + button_height/2 + 50, button_width, button_height)
         self.active = True
         self.font = pygame.font.Font(None, 36)  
 
@@ -107,16 +107,16 @@ class MenuScreen:
             pos = pygame.mouse.get_pos()
             if self.start_button.rect.collidepoint(pos):
                 self.active = False
-            elif self.exit_button.rect.collidepoint(pos):
-                pygame.quit()
-                sys.exit()
+            # elif self.exit_button.rect.collidepoint(pos):
+            #     pygame.quit()
+            #     sys.exit()
 
     def draw(self):
         self.screen.fill(BLACK)
 
         # Draw the buttons
         self.start_button.draw(self.screen)
-        self.exit_button.draw(self.screen)
+        #self.exit_button.draw(self.screen)
 
         # Render the text
         text = self.font.render("Welcome to SQUARED UP: Maze Game", True, (ROSE))
@@ -132,7 +132,45 @@ class MenuScreen:
         pygame.display.flip()
 
 
+class EndScreen:
+    def __init__(self, screen, width, height, restart_img, quit_img, button_width, button_height):
+        self.screen = screen
+        self.width = width
+        self.height = height
+        # Assuming button_width and button_height are the new dimensions for the start button
+        self.start_button = Button(restart_img, self.width/2 - button_width/2, self.height/2 - button_height, 200, 150)
+        self.quit_button = Button(quit_img, width/2 - button_width/2, height/2 + button_height/2 + 50, button_width, button_height)
+        self.active = True
+        self.font = pygame.font.Font(None, 36)  
 
+    def handle_input(self, event):
+        if event.type == pygame.MOUSEBUTTONUP:
+            pos = pygame.mouse.get_pos()
+            if self.start_button.rect.collidepoint(pos):
+                self.active = False
+            elif self.quit_button.rect.collidepoint(pos):
+                pygame.quit()
+                sys.quit()
+
+    def draw(self):
+        self.screen.fill(BLACK)
+
+        # Draw the buttons
+        self.start_button.draw(self.screen)
+        self.quit_button.draw(self.screen)
+
+        # Render the text
+        text = self.font.render("Welcome to SQUARED UP: Maze Game", True, (ROSE))
+
+        # Determine the position for the text. It should be centered horizontally,
+        # and located above the start button (minus additional space)
+        text_x = self.width / 2 - text.get_width() / 2
+        text_y = self.start_button.rect.y - text.get_height() - 20  # 20 is the additional space
+
+        # Draw the text onto the screen
+        self.screen.blit(text, (text_x, text_y))
+
+        pygame.display.flip()
 
 class Button(pygame.sprite.Sprite):
     def __init__(self, image, x, y, width=0, height=0):
