@@ -119,7 +119,7 @@ class MenuScreen:
         self.exit_button.draw(self.screen)
 
         # Render the text
-        text = self.font.render("Welcome to Maze Game", True, (ROSE))
+        text = self.font.render("Welcome to SQUARED UP: Maze Game", True, (ROSE))
 
         # Determine the position for the text. It should be centered horizontally,
         # and located above the start button (minus additional space)

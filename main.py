@@ -450,6 +450,9 @@ def main():
                         player.changespeed(0, -5)
 
         #If on the menu screen, handle input and display the screen
+        if is_muted:
+            screen.blit(speaker_muted_img, speaker_rect)
+
         if menu_screen.active:
             menu_screen.draw()
 
@@ -486,11 +489,9 @@ def main():
             
             # --- Drawing ---
 
-        if is_muted:
-            screen.blit(speaker_muted_img, speaker_rect)
 
-        # Display congratulations message
-        if congratulations:
+
+
             #new screen
             screen.fill(BLACK)
             #screen.blit(player.image, player.rect)
