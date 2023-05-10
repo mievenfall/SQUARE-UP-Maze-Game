@@ -14,11 +14,11 @@ Members:
 
 
 ----DESCRIPTION OF PROJECT---- 
-We have decided to create a maze where you have to find the goal room whilst also collecting as much coins as you can get. The maze is full of intricate and confusing paths, so you might end up lost while trying to find the goal
+We have decided to create a maze where you have to find the goal room whilst also collecting as much coins as you can get. The maze is full of intricate and confusing paths, so you might end up lost while trying to find the goal.
 
-There will be Menu Screen at the beginning to choose options Play Game or Exit
-The game will update score point as user collect and collide with coin object
-It also updates music background which user can decide to mute by pressing key 'm'
+There will be Menu Screen at the beginning to choose options Play Game or Exit.
+The game will update score point as user collect and collide with coin object.
+It also updates music background which user can decide to mute by pressing key 'm'.
 Watch out for Big Prize at the Win Room!
 
 ----INSTALLATION----
