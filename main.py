@@ -367,7 +367,19 @@ def main():
     # Set the title of the window
     pygame.display.set_caption('SQUARED UP: MAZE GAME')
  
-    
+    # Load sound files
+    pygame.mixer.music.load('background.mp3')
+    pygame.mixer.music.play(-1)
+
+    # Set the initial volume and mute state
+    volume = 1.0
+    is_muted = False
+
+    # Load speaker images
+    speaker_muted_img = pygame.image.load('mute.png')
+    speaker_muted_img = pygame.transform.scale(speaker_muted_img, (30, 30))
+    speaker_rect = speaker_muted_img.get_rect()
+    speaker_rect.topright = (screen.get_width() - 30, 30)
  
     #This list is used for toggling between rooms if the user goes through the doors
     roomsList = createRoomsList()
@@ -412,7 +424,19 @@ def main():
                     player.changespeed(0, -5)
                 if event.key == pygame.K_s:
                     player.changespeed(0, 5)
- 
+                
+                if event.key == pygame.K_m:
+                    # Toggle mute/unmute
+                    is_muted = not is_muted
+
+                    # Set the volume of all sound channels
+                    if is_muted:
+                        pygame.mixer.music.set_volume(0.0)
+                    else:
+                        pygame.mixer.music.set_volume(volume)
+
+
+
             #Notice the change in signs in the change speed
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_a:
@@ -424,6 +448,7 @@ def main():
                 if event.key == pygame.K_s:
                     player.changespeed(0, -5)
  
+
         # --- Game Logic ---
  
         player.move(current_room.wallsList)
@@ -486,6 +511,9 @@ def main():
             if stars_collected == len(current_room.star_sprites):
                 congratulations = True
                 finishPlay = True
+
+        if is_muted:
+            screen.blit(speaker_muted_img, speaker_rect)
 
         # Display congratulations message
         if congratulations:
