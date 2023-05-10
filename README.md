@@ -32,10 +32,10 @@ Pygame is a set of Python modules that are utilized for creating videogames,
 such as making and working with sprites, collision between items, music, and more.
 follow the steps below to install Pygame:
 
-(For Windows) Open the command line prompt, and input the following line:
+- (For Windows) Open the command line prompt, and input the following line:
 py -m pip install -U pygame --user
 
-(For Mac) Open the Terminal, and input the following line:
+- (For Mac) Open the Terminal, and input the following line:
 python3 -m pip install -U pygame --user
 
 For further help with installation, use the following site:
@@ -55,19 +55,19 @@ Use the key WASD:
 In the first screen of the game, you will see a Menu Screen with 2 options: Start Gane or Exit (you can use mouse click to interact with the button)
 
 - If you click Start: 
-	Game will start at Room 0, you can travel through the maze with different doors leading you to different rooms. There could be dead end, or some door might bring you back to where you enter. The game will end when you reach the Win Room (watch out for Big Prize ahead)
+	
+	- Game will start at Room 0, you can travel through the maze with different doors leading you to different rooms. There could be dead end, or some door might bring you back to where you enter. The game will end when you reach the Win Room (watch out for Big Prize ahead)
 
-	After the game is over, there will be two options for user to choose: Play Again or Exit
-		
-		Choosing Play Again will restart the program and leads the user to the Menu Screen
-
-		Clicking Exit will terminate the program and close the window
+	- After the game is over, there will be two options for user to choose: Play Again or Exit
+		- Choosing Play Again will restart the program and leads the user to the Menu Screen
+		- Clicking Exit will terminate the program and close the window
 
 - If you click Exit: 
 	Game will terminate and close the window. 
 
 
 ----Controls----
+
 WASD - Move
 
 M - Mute
