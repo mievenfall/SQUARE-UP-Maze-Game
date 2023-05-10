@@ -529,6 +529,7 @@ def main():
                     congratulations = True
                     finishPlay = True
 
+            if congratulations:
 
                 #new screen
                 screen.fill(BLACK)
