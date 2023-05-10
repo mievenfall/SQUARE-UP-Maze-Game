@@ -472,6 +472,15 @@ def main():
             screen.fill(BLACK)
             #screen.blit(player.image, player.rect)
 
+            #Display room number text at bottom left corner
+            font = pygame.font.Font(None, 32)
+            room_text = font.render(f"Room: {current_room_no + 1}", True, ROSE)
+            room_text_rect = room_text.get_rect()
+            room_text_rect.bottomleft = (650, 550)
+            screen.blit(room_text, room_text_rect)
+
+
+
             #Draw sprites onto the screen
             movingsprites.draw(screen)
             current_room.wallsList.draw(screen)
@@ -529,6 +538,7 @@ def main():
                     finishPlay = True
 
             if congratulations:
+
                 #new screen
                 screen.fill(BLACK)
                 font = pygame.font.Font(None, 40)
