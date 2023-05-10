@@ -155,7 +155,7 @@ class RoomGoal(Room):
             self.wallsList.add(wall)
 
         self.star_sprites = pygame.sprite.Group()
-        self.star_sprites.add(BigStar(400, 300))  # create a new Star instance at the center of the room
+        self.star_sprites.add(BigStar(400, 200))  # create a new Star instance at the center of the room
         
 
 
