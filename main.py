@@ -368,7 +368,11 @@ def main():
  
     # Set the title of the window
     pygame.display.set_caption('SQUARED UP: MAZE GAME')
- 
+    
+    start_button_img = "start.png"
+    exit_button_img = "exit.png"
+    
+    menu_screen = MenuScreen(screen, 800, 600, start_button_img, exit_button_img, 200, 75)
     # Load sound files
     pygame.mixer.music.load('background.mp3')
     pygame.mixer.music.play(-1)
@@ -449,7 +453,11 @@ def main():
                     player.changespeed(0, 5)
                 if event.key == pygame.K_s:
                     player.changespeed(0, -5)
- 
+
+            #Handle input events for menu screen
+            if menu_screen.active:
+                menu_screen.handle_input(event)
+
         #If on the menu screen, handle input and display the screen
         if is_muted:
             screen.blit(speaker_muted_img, speaker_rect)
@@ -457,101 +465,100 @@ def main():
         if menu_screen.active:
             menu_screen.draw()
 
-        # --- Game Logic ---
- 
-        player.move(current_room.wallsList)
+        else:
+            # --- Game Logic ---
+             # --- Drawing ---
 
-        #Check if player has collided with a star:
-        star_collisions = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
-        points = len(star_collisions)
-        total_points += points
-
- 
-        #If the player touches the end of either side of the screen, move them into the next/previous room
-
-        #GO TO THE LEFT
-        if player.rect.x < -15:
-            current_room, player.rect.x, player.rect.y, current_room_no = goLeft(current_room_no, roomsList, player)
-            print(current_room.num, current_room_no)
-        #GO TO THE RIGHT
-        if player.rect.x > 801:
-            current_room, player.rect.x, player.rect.y, current_room_no = goRight(current_room_no, roomsList, player)
-            print(current_room.num, current_room_no)
-        #GO DOWN
-        if player.rect.y > 600:
-            current_room, player.rect.x, player.rect.y, current_room_no = goDown(current_room_no, roomsList, player)
-            print(current_room.num, current_room_no)
-        #GO UP
-        if player.rect.y < 15:
-            current_room, player.rect.x, player.rect.y, current_room_no = goUp(current_room_no, roomsList, player)
-            print(current_room.num, current_room_no)
-        
-        # --- Drawing ---
-
-        #Black background color
-        screen.fill(BLACK)
-        #screen.blit(player.image, player.rect)
-
-        #Draw sprites onto the screen
-        movingsprites.draw(screen)
-        current_room.wallsList.draw(screen)
-        current_room.star_sprites.draw(screen)
-        current_room.player_sprite.draw(screen)
-
-        # Check for collision with goal room
-        if current_room == roomsList[17]:
-            # Draw stars onto the screen
-            current_room.star_sprites.draw(screen)
-            
-            # Check for collision with stars
-            star_collide = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
-
-            #Display text to tell user the big prize at the WIN ROOM:
-            font = pygame.font.Font(None, 24)
-            text = font.render("Double your score with the big prize", True, ROSE)
-            screen.blit(text, (screen.get_width() // 2 - text.get_width() // 2, 35))
-
-            if len(star_collide) > 0:
-                stars_collected += 1
-                total_points += len(star_collide)
-
-            # Check if all stars have been collected
-            if stars_collected == len(current_room.star_sprites):
-                congratulations = True
-                finishPlay = True
-
-
-
-
-            #new screen
+            #Black background color
             screen.fill(BLACK)
-            font = pygame.font.Font(None, 40)
-            text1 = font.render("Congratulations!", True, ROSE)
-            text1_rect = text1.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - 50))
-            screen.blit(text1, text1_rect)
+            #screen.blit(player.image, player.rect)
 
-            font = pygame.font.Font(None, 30)
-            text2 = font.render("You have reached the goal room!", True, ROSE)
-            text2_rect = text2.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 50))
-            screen.blit(text2, text2_rect)
-
-            # Display score in the middle of the screen
-            font = pygame.font.Font(None, 34)
-            text3 = font.render(f"New Score: {total_points*2}", True, ROSE)   #Times 2 score
-            text3_rect = text3.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
-            screen.blit(text3, text3_rect)
-
-            #Update walls color and draw them on the screen
+            #Draw sprites onto the screen
+            movingsprites.draw(screen)
             current_room.wallsList.draw(screen)
-            pygame.display.flip()
-            pygame.time.wait(20000)
+            current_room.star_sprites.draw(screen)
+            current_room.player_sprite.draw(screen)
+            player.move(current_room.wallsList)
+
+            #Check if player has collided with a star:
+            star_collisions = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
+            points = len(star_collisions)
+            total_points += points
+
+     
+            #If the player touches the end of either side of the screen, move them into the next/previous room
+
+            #GO TO THE LEFT
+            if player.rect.x < -15:
+                current_room, player.rect.x, player.rect.y, current_room_no = goLeft(current_room_no, roomsList, player)
+                print(current_room.num, current_room_no)
+            #GO TO THE RIGHT
+            if player.rect.x > 801:
+                current_room, player.rect.x, player.rect.y, current_room_no = goRight(current_room_no, roomsList, player)
+                print(current_room.num, current_room_no)
+            #GO DOWN
+            if player.rect.y > 600:
+                current_room, player.rect.x, player.rect.y, current_room_no = goDown(current_room_no, roomsList, player)
+                print(current_room.num, current_room_no)
+            #GO UP
+            if player.rect.y < 15:
+                current_room, player.rect.x, player.rect.y, current_room_no = goUp(current_room_no, roomsList, player)
+                print(current_room.num, current_room_no)
             
 
-        #Display score at left corner
-        if not congratulations:
-            font = pygame.font.Font(None, 36)
-            text = font.render(f"Points: {total_points}", True, PINK)
-            screen.blit(text, (30, 30))
+
+            # Check for collision with goal room
+            if current_room == roomsList[17]:
+                # Draw stars onto the screen
+                current_room.star_sprites.draw(screen)
+                
+                # Check for collision with stars
+                star_collide = pygame.sprite.spritecollide(player, current_room.star_sprites, True)
+
+                #Display text to tell user the big prize at the WIN ROOM:
+                font = pygame.font.Font(None, 24)
+                text = font.render("Double your score with the big prize", True, ROSE)
+                screen.blit(text, (screen.get_width() // 2 - text.get_width() // 2, 35))
+
+                if len(star_collide) > 0:
+                    stars_collected += 1
+                    total_points += len(star_collide)
+
+                # Check if all stars have been collected
+                if stars_collected == len(current_room.star_sprites):
+                    congratulations = True
+                    finishPlay = True
+
+
+                #new screen
+                screen.fill(BLACK)
+                font = pygame.font.Font(None, 40)
+                text1 = font.render("Congratulations!", True, ROSE)
+                text1_rect = text1.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 - 50))
+                screen.blit(text1, text1_rect)
+
+                font = pygame.font.Font(None, 30)
+                text2 = font.render("You have reached the goal room!", True, ROSE)
+                text2_rect = text2.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2 + 50))
+                screen.blit(text2, text2_rect)
+
+                # Display score in the middle of the screen
+                font = pygame.font.Font(None, 34)
+                text3 = font.render(f"New Score: {total_points*2}", True, ROSE)   #Times 2 score
+                text3_rect = text3.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
+                screen.blit(text3, text3_rect)
+
+                #Update walls color and draw them on the screen
+                current_room.wallsList.draw(screen)
+                pygame.display.flip()
+                pygame.time.wait(20000)
+                
+
+            #Display score at left corner
+            if not congratulations:
+                font = pygame.font.Font(None, 36)
+                text = font.render(f"Points: {total_points}", True, PINK)
+                screen.blit(text, (30, 30))
 
         pygame.display.flip()
         clock.tick(60)
