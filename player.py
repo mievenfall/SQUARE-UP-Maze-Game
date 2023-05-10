@@ -9,6 +9,7 @@ This is where you create the character via height and length, keypress, collisio
 import pygame
 from colors import *
 from wallsRooms import *
+import sys
 
 pygame.init() 
 
@@ -89,5 +90,61 @@ class BigStar(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+class MenuScreen:
+    def __init__(self, screen, width, height, start_img, exit_img, button_width, button_height):
+        self.screen = screen
+        self.width = width
+        self.height = height
+        # Assuming button_width and button_height are the new dimensions for the start button
+        self.start_button = Button(start_img, self.width/2 - button_width/2, self.height/2 - button_height, 200, 150)
+        self.exit_button = Button(exit_img, width/2 - button_width/2, height/2 + button_height/2 + 50, button_width, button_height)
+        self.active = True
+        self.font = pygame.font.Font(None, 36)  
+
+    def handle_input(self, event):
+        if event.type == pygame.MOUSEBUTTONUP:
+            pos = pygame.mouse.get_pos()
+            if self.start_button.rect.collidepoint(pos):
+                self.active = False
+            elif self.exit_button.rect.collidepoint(pos):
+                pygame.quit()
+                sys.exit()
+
+    def draw(self):
+        self.screen.fill(BLACK)
+
+        # Draw the buttons
+        self.start_button.draw(self.screen)
+        self.exit_button.draw(self.screen)
+
+        # Render the text
+        text = self.font.render("Welcome to Maze Game", True, (ROSE))
+
+        # Determine the position for the text. It should be centered horizontally,
+        # and located above the start button (minus additional space)
+        text_x = self.width / 2 - text.get_width() / 2
+        text_y = self.start_button.rect.y - text.get_height() - 20  # 20 is the additional space
+
+        # Draw the text onto the screen
+        self.screen.blit(text, (text_x, text_y))
+
+        pygame.display.flip()
+
+
+
+
+class Button(pygame.sprite.Sprite):
+    def __init__(self, image, x, y, width=0, height=0):
+        super().__init__()
+        self.image = pygame.image.load(image)
+        if width != 0 and height != 0:
+            self.image = pygame.transform.scale(self.image, (width, height))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+    def draw(self, surface):
+        surface.blit(self.image, (self.rect.x, self.rect.y))
 
 
