@@ -459,8 +459,7 @@ def main():
                 menu_screen.handle_input(event)
 
         #If on the menu screen, handle input and display the screen
-        if is_muted:
-            screen.blit(speaker_muted_img, speaker_rect)
+        
 
         if menu_screen.active:
             menu_screen.draw()
@@ -561,6 +560,10 @@ def main():
                 text = font.render(f"Points: {total_points}", True, PINK)
                 screen.blit(text, (30, 30))
 
+        if is_muted:
+            screen.blit(speaker_muted_img, speaker_rect)
+
+            
         pygame.display.flip()
         clock.tick(60)
 
