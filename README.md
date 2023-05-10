@@ -4,15 +4,20 @@
 Created by CS2520-01 Team Python
 Members:
 * Evelyn Vu
+* Tu Nguyen
 * Isabel Ganda
 * Joy Sun
 * Zi Guo
-* Tu Nguyen
+
 
 
 ----DESCRIPTION OF PROJECT---- 
-We have decided to create a maze where you have to find the goal room whilst also collecting as much coins as you can get. The maze is full of intricate and confusing paths, so you might end up lost while trying to find the goal.
+We have decided to create a maze where you have to find the goal room whilst also collecting as much coins as you can get. The maze is full of intricate and confusing paths, so you might end up lost while trying to find the goal
 
+There will be Menu Screen at the beginning to choose options Play Game or Exit
+The game will update score point as user collect and collide with coin object
+It also updates music background which user can decide to mute by pressing key 'm'
+Watch out for Big Prize at the Win Room!
 
 ----INSTALLATION----
 To make this program run, you must download both Python and Pygame.
@@ -43,6 +48,7 @@ The game is simple: try to find the goal room while collecting as much coins as 
 
 ----Controls----
 WASD - Move
+M - Mute
 
 
 
