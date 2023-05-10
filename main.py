@@ -11,7 +11,6 @@ import pygame
 from colors import *
 from wallsRooms import *
 from player import *
-import sys
 
 # Create the player, along with creating the sprite
 # Load the player image
@@ -357,6 +356,8 @@ def createStarsList(roomsList, player):
 
     return starsList
 
+
+
 def main():
     """Uses the functions, classes, and other methods to setup and create the game"""
     # Initialize pygame
@@ -367,12 +368,11 @@ def main():
  
     # Set the title of the window
     pygame.display.set_caption('SQUARED UP: MAZE GAME')
- 
+    
     start_button_img = "start.png"
     exit_button_img = "exit.png"
     
     menu_screen = MenuScreen(screen, 800, 600, start_button_img, exit_button_img, 200, 75)
-
     # Load sound files
     pygame.mixer.music.load('background.mp3')
     pygame.mixer.music.play(-1)
@@ -398,7 +398,7 @@ def main():
     stars_collected = 0
     points = 0
     total_points = 0
-
+    newPoint = 0
     
     #Set up font for displaying points
     font = pygame.font.Font(None, 36) 
@@ -409,7 +409,6 @@ def main():
 
     #Initialize flag for goal room reached
     congratulations = False
-
  
     while not finishPlay and points < total_stars:
  
@@ -419,35 +418,45 @@ def main():
             #If user clicks exit button, quit the game
             if event.type == pygame.QUIT:
                 finishPlay = True
+ 
+            #Player contrls using WASD keys
+            #Can also change the WASD keys to arrow keeps with K_LEFT, K_RIGHT, etc. if needed
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    player.changespeed(-5, 0)
+                if event.key == pygame.K_d:
+                    player.changespeed(5, 0)
+                if event.key == pygame.K_w:
+                    player.changespeed(0, -5)
+                if event.key == pygame.K_s:
+                    player.changespeed(0, 5)
+                
+                if event.key == pygame.K_m:
+                    # Toggle mute/unmute
+                    is_muted = not is_muted
+
+                    # Set the volume of all sound channels
+                    if is_muted:
+                        pygame.mixer.music.set_volume(0.0)
+                    else:
+                        pygame.mixer.music.set_volume(volume)
+
+
+
+            #Notice the change in signs in the change speed
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_a:
+                    player.changespeed(5, 0)
+                if event.key == pygame.K_d:
+                    player.changespeed(-5, 0)
+                if event.key == pygame.K_w:
+                    player.changespeed(0, 5)
+                if event.key == pygame.K_s:
+                    player.changespeed(0, -5)
 
             #Handle input events for menu screen
             if menu_screen.active:
                 menu_screen.handle_input(event)
-
-            else:
-
-                #Player contrls using WASD keys
-                #Can also change the WASD keys to arrow keeps with K_LEFT, K_RIGHT, etc. if needed
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_a:
-                        player.changespeed(-5, 0)
-                    if event.key == pygame.K_d:
-                        player.changespeed(5, 0)
-                    if event.key == pygame.K_w:
-                        player.changespeed(0, -5)
-                    if event.key == pygame.K_s:
-                        player.changespeed(0, 5)
-     
-                #Notice the change in signs in the change speed
-                if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_a:
-                        player.changespeed(5, 0)
-                    if event.key == pygame.K_d:
-                        player.changespeed(-5, 0)
-                    if event.key == pygame.K_w:
-                        player.changespeed(0, 5)
-                    if event.key == pygame.K_s:
-                        player.changespeed(0, -5)
 
         #If on the menu screen, handle input and display the screen
         if is_muted:
@@ -457,9 +466,18 @@ def main():
             menu_screen.draw()
 
         else:
-        # --- Game Logic ---
+            # --- Game Logic ---
+             # --- Drawing ---
 
-        
+            #Black background color
+            screen.fill(BLACK)
+            #screen.blit(player.image, player.rect)
+
+            #Draw sprites onto the screen
+            movingsprites.draw(screen)
+            current_room.wallsList.draw(screen)
+            current_room.star_sprites.draw(screen)
+            current_room.player_sprite.draw(screen)
             player.move(current_room.wallsList)
 
             #Check if player has collided with a star:
@@ -487,20 +505,7 @@ def main():
                 current_room, player.rect.x, player.rect.y, current_room_no = goUp(current_room_no, roomsList, player)
                 print(current_room.num, current_room_no)
             
-            # --- Drawing ---
 
-
-
-
-            #new screen
-            screen.fill(BLACK)
-            #screen.blit(player.image, player.rect)
-
-            #Draw sprites onto the screen
-            movingsprites.draw(screen)
-            current_room.wallsList.draw(screen)
-            current_room.star_sprites.draw(screen)
-            current_room.player_sprite.draw(screen)
 
             # Check for collision with goal room
             if current_room == roomsList[17]:
@@ -515,16 +520,16 @@ def main():
                 text = font.render("Double your score with the big prize", True, ROSE)
                 screen.blit(text, (screen.get_width() // 2 - text.get_width() // 2, 35))
 
-                if star_collide:
+                if len(star_collide) > 0:
                     stars_collected += 1
                     total_points += len(star_collide)
 
+                # Check if all stars have been collected
                 if stars_collected == len(current_room.star_sprites):
                     congratulations = True
                     finishPlay = True
 
-            # Display congratulations message
-            if congratulations:
+
                 #new screen
                 screen.fill(BLACK)
                 font = pygame.font.Font(None, 40)
@@ -555,8 +560,8 @@ def main():
                 text = font.render(f"Points: {total_points}", True, PINK)
                 screen.blit(text, (30, 30))
 
-            pygame.display.flip()
-            clock.tick(60)
+        pygame.display.flip()
+        clock.tick(60)
 
 
     pygame.quit()
