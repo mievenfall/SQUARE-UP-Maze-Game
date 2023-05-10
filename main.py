@@ -450,6 +450,12 @@ def main():
                 if event.key == pygame.K_s:
                     player.changespeed(0, -5)
  
+        #If on the menu screen, handle input and display the screen
+        if is_muted:
+            screen.blit(speaker_muted_img, speaker_rect)
+
+        if menu_screen.active:
+            menu_screen.draw()
 
         # --- Game Logic ---
  
@@ -514,12 +520,9 @@ def main():
                 congratulations = True
                 finishPlay = True
 
-        # Display mute speaker
-        if is_muted:
-            screen.blit(speaker_muted_img, speaker_rect)
 
-        # Display congratulations message
-        if congratulations:
+
+
             #new screen
             screen.fill(BLACK)
             font = pygame.font.Font(None, 40)
