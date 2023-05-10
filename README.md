@@ -1,7 +1,9 @@
 # CS2520_MazeGame
  CS 2520 Python Project
 [Map Adventure Game] ###SQUARED UP: MAZE GAME###
+
 Created by CS2520-01 Team Python
+
 Members:
 * Evelyn Vu
 * Tu Nguyen
@@ -45,10 +47,10 @@ https://www.pygame.org/wiki/GettingStarted
 The game is simple: try to find the goal room while collecting as much coins as you can. Try to keep notes on where each path leads to where, as some paths might bring you back to where you started.
 
 Use the key WASD:
-W - moving up
-A - moving left
-S - moving down
-D - moving right
+- W - moving up
+- A - moving left
+- S - moving down
+- D - moving right
 
 In the first screen of the game, you will see a Menu Screen with 2 options: Start Gane or Exit (you can use mouse click to interact with the button)
 
@@ -56,6 +58,7 @@ In the first screen of the game, you will see a Menu Screen with 2 options: Star
 	Game will start at Room 0, you can travel through the maze with different doors leading you to different rooms. There could be dead end, or some door might bring you back to where you enter. The game will end when you reach the Win Room (watch out for Big Prize ahead)
 
 	After the game is over, there will be two options for user to choose: Play Again or Exit
+		
 		Choosing Play Again will restart the program and leads the user to the Menu Screen
 
 		Clicking Exit will terminate the program and close the window
@@ -66,6 +69,7 @@ In the first screen of the game, you will see a Menu Screen with 2 options: Star
 
 ----Controls----
 WASD - Move
+
 M - Mute
 
 
