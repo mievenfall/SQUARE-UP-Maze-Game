@@ -373,6 +373,19 @@ def main():
     
     menu_screen = MenuScreen(screen, 800, 600, start_button_img, exit_button_img, 200, 75)
 
+    # Load sound files
+    pygame.mixer.music.load('background.mp3')
+    pygame.mixer.music.play(-1)
+
+    # Set the initial volume and mute state
+    volume = 1.0
+    is_muted = False
+
+    # Load speaker images
+    speaker_muted_img = pygame.image.load('mute.png')
+    speaker_muted_img = pygame.transform.scale(speaker_muted_img, (30, 30))
+    speaker_rect = speaker_muted_img.get_rect()
+    speaker_rect.topright = (screen.get_width() - 30, 30)
  
     #This list is used for toggling between rooms if the user goes through the doors
     roomsList = createRoomsList()
@@ -473,7 +486,12 @@ def main():
             
             # --- Drawing ---
 
-            #Black background color
+        if is_muted:
+            screen.blit(speaker_muted_img, speaker_rect)
+
+        # Display congratulations message
+        if congratulations:
+            #new screen
             screen.fill(BLACK)
             #screen.blit(player.image, player.rect)
 
