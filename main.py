@@ -512,6 +512,7 @@ def main():
                 congratulations = True
                 finishPlay = True
 
+        # Display mute speaker
         if is_muted:
             screen.blit(speaker_muted_img, speaker_rect)
 
