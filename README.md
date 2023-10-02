@@ -1,7 +1,7 @@
 # CS2520_MazeGame
  CS 2520 Python Project
 [Map Adventure Game]
-###SQUARED UP: MAZE GAME
+### SQUARED UP: MAZE GAME
 
 Created by CS2520-01 Team Python
 
@@ -44,7 +44,10 @@ python3 -m pip install -U pygame --user
 
 For further help with installation, use the following site for [Pygame](https://www.pygame.org/wiki/GettingStarted)
 
-
+To run the game:
+```bash
+python main.py
+```
 
 ## Getting Started
 The game is simple: try to find the goal room while collecting as much coins as you can. Try to keep notes on where each path leads to where, as some paths might bring you back to where you started.
