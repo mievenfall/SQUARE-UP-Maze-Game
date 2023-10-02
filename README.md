@@ -1,6 +1,7 @@
 # CS2520_MazeGame
  CS 2520 Python Project
-[Map Adventure Game] ###SQUARED UP: MAZE GAME###
+[Map Adventure Game]
+###SQUARED UP: MAZE GAME###
 
 Created by CS2520-01 Team Python
 
@@ -13,7 +14,7 @@ Members:
 
 
 
-----DESCRIPTION OF PROJECT---- 
+## DESCRIPTION OF PROJECT
 We have decided to create a maze where you have to find the goal room whilst also collecting as much coins as you can get. The maze is full of intricate and confusing paths, so you might end up lost while trying to find the goal.
 
 There will be Menu Screen at the beginning to choose options Play Game or Exit.
@@ -21,7 +22,7 @@ The game will update score point as user collect and collide with coin object.
 It also loads music background which user can decide to mute by pressing key 'm'.
 Watch out for Big Prize at the Win Room!
 
-----INSTALLATION----
+## INSTALLATION
 To make this program run, you must download both Python and Pygame.
 
 Use the following site to install Python:
@@ -43,7 +44,7 @@ https://www.pygame.org/wiki/GettingStarted
 
 
 
-----Getting Started----
+## Getting Started
 The game is simple: try to find the goal room while collecting as much coins as you can. Try to keep notes on where each path leads to where, as some paths might bring you back to where you started.
 
 Use the key WASD:
@@ -66,7 +67,7 @@ In the first screen of the game, you will see a Menu Screen with 2 options: Star
 	Game will terminate and close the window. 
 
 
-----Controls----
+## Controls
 
 WASD - Move
 
